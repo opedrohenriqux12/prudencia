@@ -221,7 +221,7 @@
       s.innerHTML = `
         <div class="case-page-wrap">
           <div class="case-card-container" id="case-container-${i}">
-            <svg class="card-border-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <svg class="card-border-svg" viewBox="-2 -2 104 104" preserveAspectRatio="none" aria-hidden="true">
               <path class="border-path" id="border-path-${i}" d="M 50,0 L 94,0 A 6,6 0 0,1 100,6 L 100,94 A 6,6 0 0,1 94,100 L 6,100 A 6,6 0 0,1 0,94 L 0,6 A 6,6 0 0,1 6,0 Z" vector-effect="non-scaling-stroke" />
             </svg>
             <div class="case-card-single glass">
@@ -302,30 +302,53 @@
     if (timerDisp) timerDisp.style.display = "inline-flex";
     if (timerCount) timerCount.textContent = "25s";
 
+    const DURATION = 25000;
+    const startTime = performance.now();
+
+    let pathLen = 400;
     if (path) {
-      const pathLen = path.getTotalLength() || 400;
+      try {
+        pathLen = path.getTotalLength() || 400;
+      } catch (e) {
+        pathLen = 400;
+      }
       path.style.transition = 'none';
       path.style.strokeDasharray = `${pathLen}`;
       path.style.strokeDashoffset = `${pathLen}`;
-      void path.offsetWidth;
-      path.style.transition = 'stroke-dashoffset 25s linear, stroke 0.4s ease, filter 0.4s ease';
-      path.style.strokeDashoffset = '0';
     }
 
-    st.intervalId = setInterval(() => {
-      st.secondsLeft--;
-      if (timerCount) timerCount.textContent = `${st.secondsLeft}s`;
+    function updateFrame(now) {
+      if (!st.isRunning) return;
 
-      if (st.secondsLeft <= 10 && st.secondsLeft > 0) {
-        if (container) container.classList.add("timer-warning");
+      const elapsed = Math.min(DURATION, now - startTime);
+      const progress = elapsed / DURATION;
+      const remainingSeconds = Math.ceil((DURATION - elapsed) / 1000);
+
+      st.secondsLeft = Math.max(0, remainingSeconds);
+
+      if (timerCount) {
+        timerCount.textContent = `${st.secondsLeft}s`;
       }
 
-      if (st.secondsLeft <= 0) {
-        clearInterval(st.intervalId);
-        st.intervalId = null;
+      if (path && pathLen > 0) {
+        const currentOffset = pathLen * (1 - progress);
+        path.style.strokeDashoffset = `${currentOffset}`;
+      }
+
+      if (st.secondsLeft <= 10 && st.secondsLeft > 0) {
+        if (container && !container.classList.contains("timer-warning")) {
+          container.classList.add("timer-warning");
+        }
+      }
+
+      if (progress < 1.0) {
+        st.animFrameId = requestAnimationFrame(updateFrame);
+      } else {
         st.isRunning = false;
         st.isFinished = true;
-
+        if (path) {
+          path.style.strokeDashoffset = '0';
+        }
         if (container) {
           container.classList.remove("timer-warning");
           container.classList.add("timer-finished");
@@ -334,7 +357,9 @@
           timerCount.textContent = "0s · Tempo Esgotado!";
         }
       }
-    }, 1000);
+    }
+
+    st.animFrameId = requestAnimationFrame(updateFrame);
   }
 
   function revealGabarito(caseIdx) {
