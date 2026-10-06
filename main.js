@@ -20,34 +20,50 @@
   const later = (fn, ms) => timers.push(setTimeout(fn, reduce ? 0 : ms));
 
   /* ---------- Divide textos em caracteres/letras para efeito Typewriter suave e fluido ---------- */
-  $$(".words").forEach(el => {
-    let globalCharIndex = 0;
-    const walk = node => [...node.childNodes].forEach(n => {
-      if (n.nodeType !== 3) return walk(n);
-      const text = n.textContent;
-      const frag = document.createDocumentFragment();
-      const words = text.split(/(\s+)/);
-      words.forEach(w => {
-        if (!w.trim()) {
-          frag.append(document.createTextNode(w));
-          return;
-        }
-        const wordSpan = document.createElement("span");
-        wordSpan.className = "w";
-        // Quebra cada palavra em letras individuais para efeito de escrita letra a letra
-        [...w].forEach(char => {
-          const charSpan = document.createElement("span");
-          charSpan.className = "ch";
-          charSpan.textContent = char;
-          charSpan.style.setProperty("--ci", globalCharIndex++);
-          wordSpan.append(charSpan);
+  function applyTypewriter(root = document) {
+    $$(".words", root).forEach(el => {
+      if (el.dataset.twDone) return;
+      el.dataset.twDone = "true";
+      let globalCharIndex = 0;
+      const walk = node => [...node.childNodes].forEach(n => {
+        if (n.nodeType !== 3) return walk(n);
+        const text = n.textContent;
+        const frag = document.createDocumentFragment();
+        const words = text.split(/(\s+)/);
+        words.forEach(w => {
+          if (!w.trim()) {
+            frag.append(document.createTextNode(w));
+            return;
+          }
+          const wordSpan = document.createElement("span");
+          wordSpan.className = "w";
+          [...w].forEach(char => {
+            const charSpan = document.createElement("span");
+            charSpan.className = "ch";
+            charSpan.textContent = char;
+            charSpan.style.setProperty("--ci", globalCharIndex++);
+            wordSpan.append(charSpan);
+          });
+          frag.append(wordSpan);
         });
-        frag.append(wordSpan);
+        n.replaceWith(frag);
       });
-      n.replaceWith(frag);
+      walk(el);
+
+      // Se for inserido dinamicamente (ex: nos atos ou áreas) enquanto a cena já está ativa (.on)
+      if (el.closest(".scene.on")) {
+        el.classList.add("tw-live");
+        requestAnimationFrame(() => {
+          $$(".ch", el).forEach(ch => {
+            ch.style.animation = `typeChar 0.95s cubic-bezier(0.16, 1, 0.3, 1) both`;
+            ch.style.animationDelay = `calc(${ch.style.getPropertyValue("--ci")} * 32ms + 220ms)`;
+          });
+        });
+      }
     });
-    walk(el);
-  });
+  }
+
+  applyTypewriter(document);
 
   const indexScene = s => {
     $$(".gl > span", s).forEach((e, i) => e.style.setProperty("--i", i));
@@ -198,7 +214,7 @@
     const nextLabel = k < n - 1 ? "próxima área (ou clique →)" : "avançar para o Caso Master →";
     card.innerHTML = `<div class="swap">
       <span class="idx">0${k + 1} / 0${n}</span>
-      <h3>${a.titulo}</h3>
+      <h3 class="words">${a.titulo}</h3>
       <span class="nm">${a.nome}</span>
       <p>${a.texto}</p>
       <p class="ex"><b>Exemplo:</b> ${a.exemplo}</p>
@@ -207,6 +223,7 @@
         <button class="link btn-area-next">${nextLabel}</button>
       </div>
     </div>`;
+    applyTypewriter(card);
     $(".btn-area-prev", card).onclick = () => retreatPrev();
     $(".btn-area-next", card).onclick = () => advanceNext();
   }
@@ -224,34 +241,38 @@
     const nextActLabel = k < n - 1 ? `Avançar para ${C.atos[k + 1].n} →` : `Avançar para Notícias →`;
 
     actStage.innerHTML = `
-      <span class="act-num swap" aria-hidden="true">${k + 1}</span>
-      <div class="swap">
-        <h3>${a.titulo}</h3>
-        <p>${a.texto}</p>
+      <span class="act-num act-item" style="--i:0" aria-hidden="true">${k + 1}</span>
+      <div class="act-mid">
+        <h3 class="words act-item" style="--i:1">${a.titulo}</h3>
+        <p class="act-item" style="--i:2">${a.texto}</p>
       </div>
-      <div class="act-right swap">
-        <p class="licao">${a.licao}</p>
-        <button class="link btn-act-next" style="margin-top:1rem;display:inline-block;font-weight:700">${nextActLabel}</button>
+      <div class="act-right">
+        <p class="licao act-item" style="--i:3">${a.licao}</p>
+        <button class="link btn-act-next act-item" style="--i:4;margin-top:1.2rem;display:inline-block;font-weight:700">${nextActLabel}</button>
       </div>
     `;
+    applyTypewriter(actStage);
     $(".btn-act-next", actStage).onclick = () => advanceNext();
   }
 
   /* ---------- Banco Master: Mural de notícias ---------- */
   function renderNews() {
     const grid = $(".news-grid");
-    if (!grid || grid.children.length) return;
-    grid.innerHTML = C.noticiasMaster.map(n => `
-      <article class="news-card">
+    if (!grid) return;
+    if (grid.children.length && grid.dataset.rendered) return;
+    grid.dataset.rendered = "true";
+    grid.innerHTML = C.noticiasMaster.map((n, i) => `
+      <article class="news-card a" style="--i:${i + 2}">
         <div class="news-meta">
           <span>${n.veiculo}</span>
           <span class="news-badge">${n.data}</span>
         </div>
-        <h3>${n.manchete}</h3>
+        <h3 class="words">${n.manchete}</h3>
         <p>${n.trecho}</p>
         <div class="news-infracao">${n.infracao}</div>
       </article>
     `).join("");
+    applyTypewriter(grid);
   }
 
   /* ---------- Fluxo com fundos ---------- */
@@ -289,9 +310,11 @@
   /* ---------- Dinâmica: Casos 1 a 5 ---------- */
   function renderCases1() {
     const grid = $("#cases-grid-1");
-    if (!grid || grid.children.length) return;
-    grid.innerHTML = C.situacoesParte1.map(item => `
-      <div class="case-card">
+    if (!grid) return;
+    if (grid.children.length && grid.dataset.rendered) return;
+    grid.dataset.rendered = "true";
+    grid.innerHTML = C.situacoesParte1.map((item, i) => `
+      <div class="case-card a" style="--i:${i + 2}">
         <span class="case-badge">${item.titulo}</span>
         <p class="cenario">${item.cenario}</p>
         <p class="case-question">${item.pergunta}</p>
@@ -302,9 +325,11 @@
   /* ---------- Dinâmica: Casos 6 a 10 ---------- */
   function renderCases2() {
     const grid = $("#cases-grid-2");
-    if (!grid || grid.children.length) return;
-    grid.innerHTML = C.situacoesParte2.map(item => `
-      <div class="case-card">
+    if (!grid) return;
+    if (grid.children.length && grid.dataset.rendered) return;
+    grid.dataset.rendered = "true";
+    grid.innerHTML = C.situacoesParte2.map((item, i) => `
+      <div class="case-card a" style="--i:${i + 2}">
         <span class="case-badge">${item.titulo}</span>
         <p class="cenario">${item.cenario}</p>
         <p class="case-question">${item.pergunta}</p>
@@ -315,11 +340,13 @@
   /* ---------- Gabarito Completo ---------- */
   function renderAnswers() {
     const col1 = $("#ans-col-1"), col2 = $("#ans-col-2");
-    if (!col1 || col1.children.length) return;
-    const renderList = list => list.map(item => {
+    if (!col1) return;
+    if (col1.children.length && col1.dataset.rendered) return;
+    col1.dataset.rendered = "true";
+    const renderList = (list, offset) => list.map((item, i) => {
       const cls = item.resposta.toLowerCase();
       return `
-        <div class="ans-item ${cls}">
+        <div class="ans-item ${cls} a" style="--i:${offset + i + 1}">
           <div class="ans-top">
             <span class="ans-num">${item.titulo}</span>
             <span class="ans-tag ${cls}">${item.resposta}</span>
@@ -329,8 +356,8 @@
         </div>
       `;
     }).join("");
-    col1.innerHTML = renderList(C.situacoesParte1);
-    col2.innerHTML = renderList(C.situacoesParte2);
+    col1.innerHTML = renderList(C.situacoesParte1, 1);
+    col2.innerHTML = renderList(C.situacoesParte2, 6);
   }
 
   /* ---------- Final ---------- */
