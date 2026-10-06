@@ -460,65 +460,54 @@ body.back .scene .a{
 /* SVG de contorno animado */
 .card-border-svg {
   position: absolute;
-  inset: -5px;
-  width: calc(100% + 10px);
-  height: calc(100% + 10px);
+  inset: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
   pointer-events: none;
   z-index: 2;
   overflow: visible;
 }
 
-.card-border-svg rect {
+.card-border-svg path.border-path {
   fill: none;
-  stroke: transparent;
-  stroke-width: 3.5px;
-  rx: calc(var(--r) + 2px);
-  ry: calc(var(--r) + 2px);
+  stroke: var(--g3);
+  stroke-width: 4px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
   transition: stroke 0.4s ease, filter 0.4s ease;
+  opacity: 0;
 }
 
-/* Quando o timer está rodando: linha contorna o card continuamente */
-.case-card-container.timer-active .card-border-svg rect {
-  stroke: var(--g3);
-  stroke-dasharray: 100 200;
-  animation: borderRun 2.2s linear infinite;
-  filter: drop-shadow(0 0 8px rgba(46,158,91,0.6));
+/* Quando o timer está rodando: exibe a linha contínua em progresso */
+.case-card-container.timer-active .card-border-svg path.border-path {
+  opacity: 1;
+  filter: drop-shadow(0 0 8px rgba(46,158,91,0.65));
 }
 
-/* Nos últimos 10 segundos: contorno vermelho pulsante em contagem regressiva */
-.case-card-container.timer-warning .card-border-svg rect {
+/* Nos últimos 10 segundos: muda para tom de alerta vermelho pulsante */
+.case-card-container.timer-warning .card-border-svg path.border-path {
+  opacity: 1;
   stroke: var(--alert);
-  stroke-dasharray: 120 120;
-  animation: borderRun 1.1s linear infinite, borderPulse 0.6s ease-in-out infinite alternate;
   filter: drop-shadow(0 0 12px rgba(229,96,77,0.85));
+  animation: borderWarningPulse 0.6s ease-in-out infinite alternate;
 }
 
-/* Quando o tempo encerra (0s) */
-.case-card-container.timer-finished .card-border-svg rect {
-  stroke: var(--g4);
-  stroke-dasharray: none;
-  animation: none;
+/* Quando o tempo encerra (0s): linha fecha o ciclo completo de 25s */
+.case-card-container.timer-finished .card-border-svg path.border-path {
+  opacity: 1;
+  stroke: var(--g3);
   filter: drop-shadow(0 0 8px rgba(46,158,91,0.5));
 }
 
-@keyframes borderRun {
+@keyframes borderWarningPulse {
   from {
-    stroke-dashoffset: 600;
+    stroke-width: 4px;
+    filter: drop-shadow(0 0 8px rgba(229,96,77,0.7));
   }
   to {
-    stroke-dashoffset: 0;
-  }
-}
-
-@keyframes borderPulse {
-  from {
-    opacity: 0.6;
-    stroke-width: 3.5px;
-  }
-  to {
-    opacity: 1;
-    stroke-width: 5px;
+    stroke-width: 5.5px;
+    filter: drop-shadow(0 0 14px rgba(229,96,77,1));
   }
 }
 

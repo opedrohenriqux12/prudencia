@@ -222,7 +222,7 @@
         <div class="case-page-wrap">
           <div class="case-card-container" id="case-container-${i}">
             <svg class="card-border-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-              <rect class="border-rect" x="1.5" y="1.5" width="97" height="97" rx="12" ry="12" vector-effect="non-scaling-stroke" />
+              <path class="border-path" id="border-path-${i}" d="M 50,0 L 94,0 A 6,6 0 0,1 100,6 L 100,94 A 6,6 0 0,1 94,100 L 6,100 A 6,6 0 0,1 0,94 L 0,6 A 6,6 0 0,1 6,0 Z" vector-effect="non-scaling-stroke" />
             </svg>
             <div class="case-card-single glass">
               <div class="case-card-header">
@@ -292,6 +292,7 @@
     const timerBtn = $(`#timer-btn-${caseIdx}`, s);
     const timerDisp = $(`#timer-disp-${caseIdx}`, s);
     const timerCount = $(`#timer-count-${caseIdx}`, s);
+    const path = $(`#border-path-${caseIdx}`, s);
 
     if (container) {
       container.classList.add("timer-active");
@@ -300,6 +301,16 @@
     if (timerBtn) timerBtn.style.display = "none";
     if (timerDisp) timerDisp.style.display = "inline-flex";
     if (timerCount) timerCount.textContent = "25s";
+
+    if (path) {
+      const pathLen = path.getTotalLength() || 400;
+      path.style.transition = 'none';
+      path.style.strokeDasharray = `${pathLen}`;
+      path.style.strokeDashoffset = `${pathLen}`;
+      void path.offsetWidth;
+      path.style.transition = 'stroke-dashoffset 25s linear, stroke 0.4s ease, filter 0.4s ease';
+      path.style.strokeDashoffset = '0';
+    }
 
     st.intervalId = setInterval(() => {
       st.secondsLeft--;
