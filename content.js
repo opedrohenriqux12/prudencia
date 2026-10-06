@@ -154,6 +154,19 @@ window.CONTENT = {
     }
   ],
 
+  situacoes: [
+    { num: 1, titulo: "Situação 1", cenario: "Maria emprestou R$ 100 a um amigo que sempre atrasa e já contou com esse dinheiro no orçamento do mês.", pergunta: "A atitude foi prudente ou imprudente?", resposta: "Imprudente", explicacao: "Não há certeza de que o dinheiro vai voltar. Diante do histórico de calote/atraso, não se antecipa o recebimento." },
+    { num: 2, titulo: "Situação 2", cenario: "Ana recebeu o salário na conta e só então comprou o que queria.", pergunta: "A atitude foi prudente ou imprudente?", resposta: "Prudente", explicacao: "O ganho já é certo e foi efetivamente realizado antes de assumir novos compromissos." },
+    { num: 3, titulo: "Situação 3", cenario: "Pedro tem uma bicicleta que custou R$ 800, mas hoje vale R$ 500, e continua dizendo que ela vale R$ 800.", pergunta: "A atitude foi prudente ou imprudente?", resposta: "Imprudente", explicacao: "Deveria reconhecer a perda e usar o valor menor (custo versus valor realizável líquido)." },
+    { num: 4, titulo: "Situação 4", cenario: "Carla soube que a conta de luz vai subir e passou a separar um valor extra todo mês.", pergunta: "A atitude foi prudente ou imprudente?", resposta: "Prudente", explicacao: "Ela se prepara antes para o cenário mais cauteloso, constituindo uma provisão para um aumento provável." },
+    { num: 5, titulo: "Situação 5", cenario: "Lucas recebeu uma multa que ainda pode ser contestada e decidiu ignorá-la até sair a decisão.", pergunta: "A atitude foi prudente ou imprudente?", resposta: "Imprudente", explicacao: "Deveria reservar o valor, pois há risco razoável de ter que pagar a obrigação." },
+    { num: 6, titulo: "Situação 6", cenario: "Bia soube que o celular dela caiu de preço e passou a planejar a venda pelo valor atual de mercado.", pergunta: "A atitude foi prudente ou imprudente?", resposta: "Prudente", explicacao: "Ela usa o valor que o bem realmente vale hoje no mercado, sem inflar suas expectativas de ativo." },
+    { num: 7, titulo: "Situação 7", cenario: "Rafa ganhou um prêmio em uma rifa e gastou o valor antes de recebê-lo.", pergunta: "A atitude foi prudente ou imprudente?", resposta: "Imprudente", explicacao: "Ganho futuro não se antecipa: é preciso esperar o recebimento concreto e certo." },
+    { num: 8, titulo: "Situação 8", cenario: "Sofia vai receber uma restituição de imposto, mas sem data, e decidiu não contar com ela neste mês.", pergunta: "A atitude foi prudente ou imprudente?", resposta: "Prudente", explicacao: "Ela só conta com o ganho quando houver certeza da data e realização do recurso." },
+    { num: 9, titulo: "Situação 9", cenario: "Tiago sabe que a geladeira, sem garantia, faz um barulho estranho e decidiu não separar nada para o conserto.", pergunta: "A atitude foi prudente ou imprudente?", resposta: "Imprudente", explicacao: "Deveria reservar uma quantia para o conserto provável de um passivo iminente." },
+    { num: 10, titulo: "Situação 10", cenario: "Dani combinou que uma amiga paga parte do aluguel, mas fez o orçamento prevendo pagar tudo caso ela atrase.", pergunta: "A atitude foi prudente ou imprudente?", resposta: "Prudente", explicacao: "Ela tem um plano para o caso de o valor não chegar, evitando inadimplência do passivo integral." }
+  ],
+
   fontes: [
     { nome: "Agência Brasil — cobertura sobre a liquidação do Banco Master pelo Banco Central", url: "https://agenciabrasil.ebc.com.br/" },
     { nome: "Banco Central do Brasil — comunicados oficiais e fiscalização prudencial", url: "https://www.bcb.gov.br/" },

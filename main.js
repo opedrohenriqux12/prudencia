@@ -118,6 +118,14 @@
         return;
       }
     }
+    if (s && s.classList.contains("s-case")) {
+      const caseIdx = parseInt(s.dataset.caseIdx, 10);
+      const st = caseStates[caseIdx];
+      if (st && !st.gabaritoRevealed) {
+        revealGabarito(caseIdx);
+        return;
+      }
+    }
     goTo(idx + 1);
   }
 
@@ -132,6 +140,14 @@
     if (s && s.classList.contains("s-master")) {
       if (currentActIdx > 0) {
         showAct(currentActIdx - 1);
+        return;
+      }
+    }
+    if (s && s.classList.contains("s-case")) {
+      const caseIdx = parseInt(s.dataset.caseIdx, 10);
+      const st = caseStates[caseIdx];
+      if (st && st.gabaritoRevealed) {
+        hideGabarito(caseIdx);
         return;
       }
     }
@@ -180,10 +196,170 @@
     "s-news"() { renderNews(); },
     "s-flow"(s) { runFlow(s); },
     "s-balloon"() { toggleBalloon(false); later(() => toggleBalloon(true), 2000); },
-    "s-cases-1"() { renderCases1(); },
-    "s-cases-2"() { renderCases2(); },
-    "s-answers"() { renderAnswers(); }
+    "s-case"(s) { applyTypewriter(s); }
   };
+
+  /* ---------- Gerenciamento das 10 Situações com Timer & Gabarito ---------- */
+  const situacoesList = C.situacoes || [...(C.situacoesParte1 || []), ...(C.situacoesParte2 || [])];
+  const caseStates = situacoesList.map(() => ({
+    secondsLeft: 25,
+    intervalId: null,
+    isRunning: false,
+    isFinished: false,
+    gabaritoRevealed: false
+  }));
+
+  function renderAllCases() {
+    const caseScenes = $$(".scene.s-case");
+
+    caseScenes.forEach((s, i) => {
+      const item = situacoesList[i];
+      if (!item) return;
+
+      const clsAnswer = item.resposta.toLowerCase();
+
+      s.innerHTML = `
+        <div class="case-page-wrap">
+          <div class="case-card-container" id="case-container-${i}">
+            <svg class="card-border-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+              <rect class="border-rect" x="1.5" y="1.5" width="97" height="97" rx="12" ry="12" vector-effect="non-scaling-stroke" />
+            </svg>
+            <div class="case-card-single glass">
+              <div class="case-card-header">
+                <span class="case-badge">${item.titulo} de 10</span>
+                <div class="timer-widget">
+                  <button class="timer-start-btn" id="timer-btn-${i}">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                    <span>Iniciar Timer (25s)</span>
+                  </button>
+                  <div class="timer-display" id="timer-disp-${i}" style="display:none;">
+                    <span class="timer-countdown" id="timer-count-${i}">25s</span>
+                  </div>
+                </div>
+              </div>
+
+              <p class="cenario-text">${item.cenario}</p>
+
+              <div class="case-question-box">
+                <p>${item.pergunta}</p>
+              </div>
+
+              <div class="case-card-hint">
+                <button class="btn-reveal-gabarito" id="btn-reveal-${i}">
+                  <span>Ver Gabarito (ou passe pro lado →)</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="gabarito-card-single glass ${clsAnswer}" id="gabarito-${i}" style="display:none;">
+            <div class="ans-top">
+              <span class="gabarito-title">Gabarito Oficial · ${item.titulo}</span>
+              <span class="gabarito-tag ${clsAnswer}">${item.resposta}</span>
+            </div>
+            <p class="gabarito-exp"><b>Por que:</b> ${item.explicacao}</p>
+          </div>
+        </div>
+      `;
+
+      const timerBtn = $(`#timer-btn-${i}`, s);
+      if (timerBtn) {
+        timerBtn.onclick = (e) => {
+          e.stopPropagation();
+          startTimer(i);
+        };
+      }
+
+      const revealBtn = $(`#btn-reveal-${i}`, s);
+      if (revealBtn) {
+        revealBtn.onclick = (e) => {
+          e.stopPropagation();
+          revealGabarito(i);
+        };
+      }
+    });
+  }
+
+  function startTimer(caseIdx) {
+    const st = caseStates[caseIdx];
+    if (st.isRunning) return;
+
+    st.isRunning = true;
+    st.secondsLeft = 25;
+
+    const s = scenes.find(sc => sc.dataset.caseIdx === String(caseIdx));
+    const container = $(`#case-container-${caseIdx}`, s);
+    const timerBtn = $(`#timer-btn-${caseIdx}`, s);
+    const timerDisp = $(`#timer-disp-${caseIdx}`, s);
+    const timerCount = $(`#timer-count-${caseIdx}`, s);
+
+    if (container) {
+      container.classList.add("timer-active");
+      container.classList.remove("timer-warning", "timer-finished");
+    }
+    if (timerBtn) timerBtn.style.display = "none";
+    if (timerDisp) timerDisp.style.display = "inline-flex";
+    if (timerCount) timerCount.textContent = "25s";
+
+    st.intervalId = setInterval(() => {
+      st.secondsLeft--;
+      if (timerCount) timerCount.textContent = `${st.secondsLeft}s`;
+
+      if (st.secondsLeft <= 10 && st.secondsLeft > 0) {
+        if (container) container.classList.add("timer-warning");
+      }
+
+      if (st.secondsLeft <= 0) {
+        clearInterval(st.intervalId);
+        st.intervalId = null;
+        st.isRunning = false;
+        st.isFinished = true;
+
+        if (container) {
+          container.classList.remove("timer-warning");
+          container.classList.add("timer-finished");
+        }
+        if (timerCount) {
+          timerCount.textContent = "0s · Tempo Esgotado!";
+        }
+      }
+    }, 1000);
+  }
+
+  function revealGabarito(caseIdx) {
+    const st = caseStates[caseIdx];
+    st.gabaritoRevealed = true;
+
+    const s = scenes.find(sc => sc.dataset.caseIdx === String(caseIdx));
+    const gabaritoEl = $(`#gabarito-${caseIdx}`, s);
+    const revealBtn = $(`#btn-reveal-${caseIdx}`, s);
+
+    if (gabaritoEl) {
+      gabaritoEl.style.display = "flex";
+      applyTypewriter(gabaritoEl);
+    }
+    if (revealBtn) {
+      revealBtn.style.display = "none";
+    }
+  }
+
+  function hideGabarito(caseIdx) {
+    const st = caseStates[caseIdx];
+    st.gabaritoRevealed = false;
+
+    const s = scenes.find(sc => sc.dataset.caseIdx === String(caseIdx));
+    const gabaritoEl = $(`#gabarito-${caseIdx}`, s);
+    const revealBtn = $(`#btn-reveal-${caseIdx}`, s);
+
+    if (gabaritoEl) {
+      gabaritoEl.style.display = "none";
+    }
+    if (revealBtn) {
+      revealBtn.style.display = "inline-flex";
+    }
+  }
+
+  renderAllCases();
 
   /* ---------- Áreas em órbita ---------- */
   const orbit = $(".orbit"), card = $(".area-card");
@@ -307,58 +483,7 @@
   }
   bb.onclick = () => { timers.forEach(clearTimeout); toggleBalloon(!bb.classList.contains("on")); };
 
-  /* ---------- Dinâmica: Casos 1 a 5 ---------- */
-  function renderCases1() {
-    const grid = $("#cases-grid-1");
-    if (!grid) return;
-    if (grid.children.length && grid.dataset.rendered) return;
-    grid.dataset.rendered = "true";
-    grid.innerHTML = C.situacoesParte1.map((item, i) => `
-      <div class="case-card a" style="--i:${i + 2}">
-        <span class="case-badge">${item.titulo}</span>
-        <p class="cenario">${item.cenario}</p>
-        <p class="case-question">${item.pergunta}</p>
-      </div>
-    `).join("");
-  }
 
-  /* ---------- Dinâmica: Casos 6 a 10 ---------- */
-  function renderCases2() {
-    const grid = $("#cases-grid-2");
-    if (!grid) return;
-    if (grid.children.length && grid.dataset.rendered) return;
-    grid.dataset.rendered = "true";
-    grid.innerHTML = C.situacoesParte2.map((item, i) => `
-      <div class="case-card a" style="--i:${i + 2}">
-        <span class="case-badge">${item.titulo}</span>
-        <p class="cenario">${item.cenario}</p>
-        <p class="case-question">${item.pergunta}</p>
-      </div>
-    `).join("");
-  }
-
-  /* ---------- Gabarito Completo ---------- */
-  function renderAnswers() {
-    const col1 = $("#ans-col-1"), col2 = $("#ans-col-2");
-    if (!col1) return;
-    if (col1.children.length && col1.dataset.rendered) return;
-    col1.dataset.rendered = "true";
-    const renderList = (list, offset) => list.map((item, i) => {
-      const cls = item.resposta.toLowerCase();
-      return `
-        <div class="ans-item ${cls} a" style="--i:${offset + i + 1}">
-          <div class="ans-top">
-            <span class="ans-num">${item.titulo}</span>
-            <span class="ans-tag ${cls}">${item.resposta}</span>
-          </div>
-          <p class="ans-cenario">${item.cenario}</p>
-          <p class="ans-exp"><b>Por que:</b> ${item.explicacao}</p>
-        </div>
-      `;
-    }).join("");
-    col1.innerHTML = renderList(C.situacoesParte1, 1);
-    col2.innerHTML = renderList(C.situacoesParte2, 6);
-  }
 
   /* ---------- Final ---------- */
   $(".sources ol").innerHTML = C.fontes.map(f => `<li><a href="${f.url}" target="_blank" rel="noopener">${f.nome}</a></li>`).join("");
