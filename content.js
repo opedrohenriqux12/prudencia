@@ -3,23 +3,23 @@
    ========================================================= */
 window.CONTENT = {
   areas: [
-    { id: "receber", nome: "Contas a receber", titulo: "Provisão para créditos de liquidação duvidosa",
+    { id: "receber", nome: "Contas a receber", titulo: "Preparar-se antes para o risco de calote",
       texto: "Nem todo cliente vai pagar. Se o histórico indica que parte das vendas a prazo não será recebida, essa perda é estimada e registrada já — antes do calote acontecer.",
       exemplo: "R$ 50.000 a receber, 4% de inadimplência histórica → provisão de R$ 2.000.",
       icon: '<svg viewBox="0 0 48 48"><rect x="6" y="12" width="36" height="24" rx="5"/><path class="draw" d="M6 20h36"/><circle class="pulse" cx="34" cy="29" r="3"/></svg>' },
-    { id: "estoque", nome: "Estoques", titulo: "Menor valor entre custo e valor realizável",
+    { id: "estoque", nome: "Estoques", titulo: "Registrar mercadorias pelo menor valor real",
       texto: "Se a mercadoria custou R$ 100, mas hoje só vende por R$ 80 (já descontadas as despesas de venda), o estoque vale R$ 80 no balanço. Não se registra ganho por alta de preço antes da venda.",
       exemplo: "Custo R$ 20.000 · Valor realizável R$ 15.000 → registra R$ 15.000.",
       icon: '<svg viewBox="0 0 48 48"><path d="M8 18l16-8 16 8v16l-16 8-16-8z"/><path class="draw" d="M8 18l16 8 16-8M24 26v16"/></svg>' },
-    { id: "impairment", nome: "Ativos com perda", titulo: "Redução ao valor recuperável (impairment)",
+    { id: "impairment", nome: "Bens e máquinas", titulo: "Reconhecer a perda de valor dos bens",
       texto: "Uma máquina obsoleta ou um investimento que perdeu valor não pode continuar no balanço pelo preço antigo. Ajusta-se ao valor que realmente pode ser recuperado.",
       exemplo: "Máquina contabilizada por R$ 80.000, recuperável R$ 55.000 → perda de R$ 25.000.",
       icon: '<svg viewBox="0 0 48 48"><path d="M6 38h36"/><path class="draw" d="M10 14l9 9 7-5 12 14"/><path d="M32 32h6v-6"/></svg>' },
-    { id: "passivos", nome: "Passivos e provisões", titulo: "Reconhecer obrigações prováveis cedo",
+    { id: "passivos", nome: "Dívidas e processos", titulo: "Antecipar despesas e dívidas prováveis",
       texto: "Processo judicial com perda provável? A obrigação entra no passivo agora, pela melhor estimativa — e, na dúvida entre valores razoáveis, a postura prudente pende para o maior.",
       exemplo: "Processo estimado entre R$ 10.000 e R$ 15.000 → provisão de R$ 15.000.",
       icon: '<svg viewBox="0 0 48 48"><path d="M24 6v36M12 14h24"/><path class="draw" d="M12 14l-6 12h12zM36 14l-6 12h12z"/></svg>' },
-    { id: "receitas", nome: "Receitas e ganhos", titulo: "Só com certeza razoável de realização",
+    { id: "receitas", nome: "Vendas e receitas", titulo: "Só contar com o dinheiro quando for certeza",
       texto: "Contrato assinado não é dinheiro garantido. Receita entra quando há razoável segurança de que será realizada. Ganhos possíveis ficam de fora; perdas prováveis entram.",
       exemplo: "Ação judicial que a empresa pode ganhar → não registra o ganho ainda.",
       icon: '<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="17"/><path class="draw" d="M16 24l6 6 11-12"/></svg>' }

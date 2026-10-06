@@ -345,7 +345,7 @@ body.back .scene .a{
 .act-stage p{margin:0;color:var(--ink2);font-size:clamp(1.15rem, 1.05rem + .35vw, 1.4rem);line-height:1.65}
 .act-stage .licao{padding:1.8rem 2rem;border-radius:24px;background:#FFF4F1;border:1.5px solid #F6D3CC;color:var(--ink);font-weight:500;font-size:clamp(1.12rem, 1.02rem + .3vw, 1.35rem);line-height:1.65}
 
-/* 6 · SEÇÃO EXCLUSIVA DE NOTÍCIAS (BANCO MASTER) - FONTES AMPLIADAS */
+/* /* 6 · SEÇÃO EXCLUSIVA DE NOTÍCIAS (BANCO MASTER) - FONTES AMPLIADAS */
 .s-news{flex-direction:column;justify-content:center;align-items:stretch}
 .news-container{max-width:1250px;margin:0 auto;width:100%}
 .news-header{margin-bottom:clamp(1.4rem,3vh,2.6rem)}
