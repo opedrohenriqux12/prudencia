@@ -457,59 +457,7 @@ body.back .scene .a{
   transition: transform 0.4s var(--ease);
 }
 
-/* SVG de contorno animado */
-.card-border-svg {
-  position: absolute;
-  inset: -2px;
-  width: calc(100% + 4px);
-  height: calc(100% + 4px);
-  pointer-events: none;
-  z-index: 2;
-  overflow: visible;
-}
 
-.card-border-svg path.border-path {
-  fill: none;
-  stroke: var(--g3);
-  stroke-width: 4px;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  vector-effect: non-scaling-stroke;
-  transition: stroke 0.4s ease, filter 0.4s ease;
-  opacity: 0;
-}
-
-/* Quando o timer está rodando: exibe a linha contínua em progresso */
-.case-card-container.timer-active .card-border-svg path.border-path {
-  opacity: 1;
-  filter: drop-shadow(0 0 8px rgba(46,158,91,0.65));
-}
-
-/* Nos últimos 10 segundos: muda para tom de alerta vermelho pulsante */
-.case-card-container.timer-warning .card-border-svg path.border-path {
-  opacity: 1;
-  stroke: var(--alert);
-  filter: drop-shadow(0 0 12px rgba(229,96,77,0.85));
-  animation: borderWarningPulse 0.6s ease-in-out infinite alternate;
-}
-
-/* Quando o tempo encerra (0s): linha fecha o ciclo completo de 25s */
-.case-card-container.timer-finished .card-border-svg path.border-path {
-  opacity: 1;
-  stroke: var(--g3);
-  filter: drop-shadow(0 0 8px rgba(46,158,91,0.5));
-}
-
-@keyframes borderWarningPulse {
-  from {
-    stroke-width: 4px;
-    filter: drop-shadow(0 0 8px rgba(229,96,77,0.7));
-  }
-  to {
-    stroke-width: 5.5px;
-    filter: drop-shadow(0 0 14px rgba(229,96,77,1));
-  }
-}
 
 /* Card principal da situação */
 .case-card-single {

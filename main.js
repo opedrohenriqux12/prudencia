@@ -221,9 +221,6 @@
       s.innerHTML = `
         <div class="case-page-wrap">
           <div class="case-card-container" id="case-container-${i}">
-            <svg class="card-border-svg" viewBox="-2 -2 104 104" preserveAspectRatio="none" aria-hidden="true">
-              <path class="border-path" id="border-path-${i}" d="M 50,0 L 94,0 A 6,6 0 0,1 100,6 L 100,94 A 6,6 0 0,1 94,100 L 6,100 A 6,6 0 0,1 0,94 L 0,6 A 6,6 0 0,1 6,0 Z" vector-effect="non-scaling-stroke" />
-            </svg>
             <div class="case-card-single glass">
               <div class="case-card-header">
                 <span class="case-badge">${item.titulo} de 10</span>
@@ -292,7 +289,6 @@
     const timerBtn = $(`#timer-btn-${caseIdx}`, s);
     const timerDisp = $(`#timer-disp-${caseIdx}`, s);
     const timerCount = $(`#timer-count-${caseIdx}`, s);
-    const path = $(`#border-path-${caseIdx}`, s);
 
     if (container) {
       container.classList.add("timer-active");
@@ -304,18 +300,6 @@
 
     const DURATION = 25000;
     const startTime = performance.now();
-
-    let pathLen = 400;
-    if (path) {
-      try {
-        pathLen = path.getTotalLength() || 400;
-      } catch (e) {
-        pathLen = 400;
-      }
-      path.style.transition = 'none';
-      path.style.strokeDasharray = `${pathLen}`;
-      path.style.strokeDashoffset = `${pathLen}`;
-    }
 
     function updateFrame(now) {
       if (!st.isRunning) return;
@@ -330,11 +314,6 @@
         timerCount.textContent = `${st.secondsLeft}s`;
       }
 
-      if (path && pathLen > 0) {
-        const currentOffset = pathLen * (1 - progress);
-        path.style.strokeDashoffset = `${currentOffset}`;
-      }
-
       if (st.secondsLeft <= 10 && st.secondsLeft > 0) {
         if (container && !container.classList.contains("timer-warning")) {
           container.classList.add("timer-warning");
@@ -346,9 +325,6 @@
       } else {
         st.isRunning = false;
         st.isFinished = true;
-        if (path) {
-          path.style.strokeDashoffset = '0';
-        }
         if (container) {
           container.classList.remove("timer-warning");
           container.classList.add("timer-finished");
