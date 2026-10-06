@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Prudência: na dúvida, seja cauteloso | Apresentação Interativa</title>
+  <meta name="description" content="O princípio da prudência na contabilidade: conceito, simulador, notícias do caso Banco Master e dinâmica prática para sala." />
+  <meta name="theme-color" content="#2E9E5B" />
+  <meta property="og:title" content="Prudência: na dúvida, seja cauteloso." />
+  <meta property="og:description" content="Apresentação interativa fluida com dinâmicas para sala de aula e caso Banco Master." />
+  <meta property="og:locale" content="pt_BR" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="cursor" aria-hidden="true"></div>
+
+  <!-- Fundo orgânico com morph suave -->
+  <div class="stage-bg" aria-hidden="true">
+    <div class="morph m1"></div><div class="morph m2"></div><div class="morph m3"></div>
+  </div>
+
+  <header class="top">
+    <span class="logo">
+      <svg viewBox="0 0 64 64" width="26" height="26" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#2E9E5B"/><path d="M32 14v36M18 22h28M18 22l-7 13h14zM46 22l-7 13h14zM24 50h16" stroke="#fff" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Prudência
+    </span>
+    <div class="top-actions">
+      <span class="chapter" aria-live="polite"></span>
+      <button class="fs-btn" id="fs-btn" aria-label="Alternar Tela Cheia" title="Tela Cheia (F11)">
+        <svg viewBox="0 0 24 24" class="i-fs-enter"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg viewBox="0 0 24 24" class="i-fs-exit"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="stage" aria-roledescription="apresentação interativa">
+
+    <!-- 0 · ABERTURA -->
+    <section class="scene s-hero" data-ch="Abertura" aria-label="Abertura">
+      <svg class="scale a" viewBox="0 0 400 400" aria-hidden="true">
+        <rect x="194" y="110" width="12" height="210" rx="6" fill="#86D9A0"/>
+        <rect x="140" y="312" width="120" height="16" rx="8" fill="#2E9E5B"/>
+        <g class="beam">
+          <rect x="80" y="104" width="240" height="10" rx="5" fill="#2E9E5B"/>
+          <path d="M100 110l-30 60M100 110l30 60M300 110l-30 60M300 110l30 60" stroke="#86D9A0" stroke-width="2"/>
+          <path d="M60 170h80a40 18 0 0 1-80 0zM260 170h80a40 18 0 0 1-80 0z" fill="#A8E6B8"/>
+        </g>
+        <circle cx="200" cy="104" r="14" fill="#fff" stroke="#2E9E5B" stroke-width="4"/>
+      </svg>
+      <div class="hero-copy">
+        <p class="eyebrow a">Princípios contábeis</p>
+        <h1 class="words">Prudência: na dúvida, <em>seja cauteloso.</em></h1>
+        <p class="lead a">A regra de bom senso que impede a contabilidade de “enfeitar” a realidade e gerar ilusões patrimoniais.</p>
+      </div>
+    </section>
+
+    <!-- 1 · CONCEITO -->
+    <section class="scene s-concept" data-ch="O que é" aria-label="O que é">
+      <div class="concept-layout">
+        <div class="concept-left">
+          <p class="eyebrow a">Definição conceitual</p>
+          <h2 class="def words">Diante de incertezas, escolha a opção <em>mais cautelosa.</em></h2>
+          <div class="duo">
+            <div class="pill a up"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg><span><b>Perdas prováveis</b> entram já</span></div>
+            <div class="pill a"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg><span><b>Ganhos possíveis</b> esperam a certeza</span></div>
+          </div>
+        </div>
+
+        <div class="concept-right glass a">
+          <div class="concept-box-tag">Fundamento Essencial</div>
+          <h3>O que é a Prudência?</h3>
+          <p class="concept-desc">
+            A <strong>prudência</strong> é o princípio contábil que exige moderação nos julgamentos sob condições de incerteza.
+          </p>
+          <p class="concept-desc">
+            Ela determina que <strong>ativos e receitas nunca sejam superestimados</strong>, e que <strong>passivos e despesas nunca sejam subestimados</strong>. O objetivo não é o pessimismo, mas garantir que as demonstrações financeiras reflitam a realidade com máxima fidelidade e transparência.
+          </p>
+          <div class="concept-highlight">
+            <span class="ch-icon">⚖️</span>
+            <span>Evita a distribuição de lucros ilusórios e protege credores, investidores e a sociedade.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 · FRASE-CHAVE -->
+    <section class="scene s-giant" data-ch="Regra de Ouro" aria-label="Frase-chave">
+      <p class="giant">
+        <span class="gl"><span>Não superestimar</span></span>
+        <span class="gl acc"><span>ativos.</span></span>
+        <span class="gl"><span>Não subestimar</span></span>
+        <span class="gl acc"><span>passivos.</span></span>
+      </p>
+    </section>
+
+    <!-- 3 · ONDE É APLICADO (órbita) -->
+    <section class="scene s-apply" data-ch="Onde se aplica" aria-label="Onde é aplicado">
+      <div class="orbit a" role="tablist" aria-label="Áreas de aplicação"></div>
+      <article class="area-card glass a" aria-live="polite"></article>
+    </section>
+
+
+
+    <!-- 5 · MASTER: ATOS -->
+    <section class="scene s-master" data-ch="Caso Banco Master" aria-label="Caso Banco Master">
+      <div class="m-head">
+        <p class="eyebrow alert a">Caso real · segundo reportagens e apurações públicas</p>
+        <div class="acts-nav a"></div>
+      </div>
+      <div class="act-stage" aria-live="polite"></div>
+    </section>
+
+    <!-- 6 · MASTER: NOTÍCIAS (NOVA SEÇÃO EXCLUSIVA DE NOTÍCIAS) -->
+    <section class="scene s-news" data-ch="Notícias do Caso Master" aria-label="Notícias e Casos de Falta de Prudência">
+      <div class="news-container">
+        <header class="news-header">
+          <p class="eyebrow alert a">Apurações na Mídia & Relatórios Regulatórios</p>
+          <h2 class="a">Onde a <em class="red">imprudência</em> virou manchete</h2>
+          <p class="a muted">Reportagens e alertas de mercado destacaram as decisões contábeis que deixaram a cautela de lado:</p>
+        </header>
+        <div class="news-grid a" aria-label="Mural de notícias sobre o Banco Master"></div>
+      </div>
+    </section>
+
+    <!-- 7 · MASTER: FLUXO -->
+    <section class="scene s-flow" data-ch="Mágica com Fundos" aria-label="A mágica com fundos">
+      <h2 class="words">A “mágica” com <em class="red">fundos.</em></h2>
+      <svg class="flow a" viewBox="0 0 720 320" role="img" aria-label="Banco injeta dinheiro em fundos; fundos compram ativos ruins do banco; ativos saem do balanço.">
+        <defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#2E9E5B"/></marker></defs>
+        <g class="node"><rect x="30" y="110" width="170" height="100" rx="24"/><text x="115" y="155">Banco</text><text x="115" y="182" class="sm">balanço “limpo”</text></g>
+        <g class="node"><rect x="520" y="110" width="170" height="100" rx="24"/><text x="605" y="155">Fundos</text><text x="605" y="182" class="sm">ligados ao banco</text></g>
+        <path class="fl f1" d="M200 130 C 300 40, 420 40, 520 130" marker-end="url(#arr)"/>
+        <path class="fl f2" d="M520 190 C 420 280, 300 280, 200 190"/>
+        <text x="360" y="48" class="lbl s1">1 · banco injeta dinheiro</text>
+        <text x="360" y="305" class="lbl s2">2 · fundos compram ativos ruins do banco</text>
+        <circle class="coin" r="8"/>
+        <g class="junk"><rect x="-14" y="-14" width="28" height="28" rx="7"/><text y="6" class="w">!</text></g>
+      </svg>
+      <p class="analogy a">É como quitar a fatura do cartão com um empréstimo de uma <b>“empresa de fachada”</b> que é sua. A dívida não some — só muda de bolso.</p>
+    </section>
+
+    <!-- 8 · BALÃO -->
+    <section class="scene s-balloon" data-ch="Balanço Inflado" aria-label="Balanço inflado versus real">
+      <button class="balloon-btn a" aria-pressed="false" aria-label="Toque para murchar o balanço inflado">
+        <span class="balloon"></span>
+        <span class="b-val">Ativos: <b>R$ 100</b></span>
+        <span class="b-hint">toque para ver o valor real · ilustrativo</span>
+      </button>
+      <div class="b-copy">
+        <h2 class="words">O que a prudência <em>exigiria.</em></h2>
+        <ul class="checks">
+          <li class="a">Reconhecer perdas de crédito assim que prováveis</li>
+          <li class="a">Ajustar ativos ao valor recuperável real</li>
+          <li class="a">Provisionar riscos em vez de transferi-los</li>
+          <li class="a">Evidenciar operações com partes relacionadas</li>
+        </ul>
+      </div>
+    </section>
+
+
+
+    <!-- 10 · DINÂMICA: SITUAÇÕES 1 A 5 -->
+    <section class="scene s-cases-1" data-ch="Dinâmica: Casos 1 a 5" aria-label="Situações do Dia a Dia 1 a 5">
+      <div class="cases-wrap">
+        <header class="cases-header">
+          <p class="eyebrow a">Dinâmica de Sala de Aula · Princípio da Prudência</p>
+          <h2 class="a">Situações do Dia a Dia (Parte 1: 1 a 5)</h2>
+          <p class="a cases-prompt"><strong>Pergunta para a sala:</strong> qual é a escolha prudente em cada situação abaixo?</p>
+        </header>
+        <div class="cases-grid a" id="cases-grid-1"></div>
+      </div>
+    </section>
+
+    <!-- 11 · DINÂMICA: SITUAÇÕES 6 A 10 -->
+    <section class="scene s-cases-2" data-ch="Dinâmica: Casos 6 a 10" aria-label="Situações do Dia a Dia 6 a 10">
+      <div class="cases-wrap">
+        <header class="cases-header">
+          <p class="eyebrow a">Dinâmica de Sala de Aula · Princípio da Prudência</p>
+          <h2 class="a">Situações do Dia a Dia (Parte 2: 6 a 10)</h2>
+          <p class="a cases-prompt"><strong>Pergunta para a sala:</strong> analise com a turma antes de abrir a próxima página de gabarito!</p>
+        </header>
+        <div class="cases-grid a" id="cases-grid-2"></div>
+      </div>
+    </section>
+
+    <!-- 12 · DINÂMICA: GABARITO COMPLETO -->
+    <section class="scene s-answers" data-ch="Gabarito da Dinâmica" aria-label="Gabarito e Justificativas">
+      <div class="answers-wrap">
+        <header class="answers-header">
+          <p class="eyebrow a">Gabarito Oficial</p>
+          <h2 class="a">Respostas & Fundamentação</h2>
+          <p class="a muted">Confira as decisões prudentes e as justificativas contábeis correspondentes:</p>
+        </header>
+        <div class="answers-columns a">
+          <div class="ans-col" id="ans-col-1"></div>
+          <div class="ans-col" id="ans-col-2"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 · FINAL -->
+    <section class="scene s-end" data-ch="Conclusão" aria-label="Conclusão">
+      <p class="final words">Prudência não é pessimismo. <em>É transparência.</em></p>
+      <details class="sources a">
+        <summary>Fontes e aviso educacional</summary>
+        <ol></ol>
+        <p>Conteúdo exclusivamente didático para aulas de Contabilidade e Administração. As informações sobre o Banco Master baseiam-se em reportagens e comunicados públicos de órgãos oficiais; os fatos seguem sob apuração.</p>
+      </details>
+      <button class="btn restart a">Recomeçar apresentação</button>
+    </section>
+  </main>
+
+  <!-- Navegação profissional: troca suave ao clicar -->
+  <nav class="player" aria-label="Navegação entre cenas">
+    <button class="pbtn prev" aria-label="Cena anterior"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+    <span class="counter" aria-live="polite"></span>
+    <div class="track" aria-label="Cenas"></div>
+    <button class="pbtn next" aria-label="Próxima cena"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+  </nav>
+
+  <script src="content.js" defer></script>
+  <script src="main.js" defer></script>
+</body>
+</html>
