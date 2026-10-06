@@ -430,23 +430,6 @@ body.back .scene .a{
 .vs{position:absolute;left:50%;top:50%;width:76px;height:76px;margin:-38px;border-radius:50%;background:#fff;display:grid;place-items:center;font:800 1.2rem var(--fh);box-shadow:var(--shadow);transform:scale(0) rotate(-180deg);transition:transform 1s var(--ease) .5s}
 .s-split.on .vs{transform:none}
 
-/* 10 & 11 · DINÂMICA: SITUAÇÕES 1-5 E 6-10 */
-.s-cases-1, .s-cases-2{flex-direction:column;justify-content:center;align-items:stretch}
-.cases-wrap{max-width:1200px;margin:0 auto;width:100%}
-.cases-header{margin-bottom:clamp(1.2rem, 2.5vh, 2rem)}
-.cases-header h2{font-size:clamp(1.7rem, 1rem + 2.4vw, 3.2rem);margin-bottom:.4rem}
-.cases-prompt{font-size:1.12rem;color:var(--g4);margin:0}
-.cases-grid{display:grid;grid-template-columns:repeat(5, 1fr);gap:clamp(.8rem, 1.2vw, 1.4rem)}
-.case-card{
-  background:#fff;
-  border:1.5px solid #DDF0E2;
-  border-radius:20px;
-  padding:clamp(1.1rem, 1.5vw, 1.4rem);
-  box-shadow:0 14px 40px -20px rgba(18,38,26,.12);
-  display:flex;
-  flex-direction:column;
-  gap:.65rem;
-  transition:transform .4s var(--ease), border-color .3s;
 /* =========================================================
    PÁGINA INDIVIDUAL DE SITUAÇÃO (DINÂMICA)
    ========================================================= */
