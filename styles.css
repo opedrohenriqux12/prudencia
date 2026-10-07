@@ -610,19 +610,23 @@ body.back .scene .a{
 .team-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 0.6rem;
 }
 
 .team-header h3 {
-  font: 700 1.1rem var(--fh);
+  font: 800 1.25rem var(--fh);
   margin: 0;
-  color: var(--ink);
+  letter-spacing: -0.02em;
 }
 
-.team-badge {
-  font: 800 0.75rem var(--fb);
-  letter-spacing: 0.08em;
+.team-card.team-a .team-header h3 {
+  color: var(--g4);
+}
+
+.team-card.team-b .team-header h3 {
+  color: var(--alert-d);
+}
   text-transform: uppercase;
   padding: 0.25rem 0.75rem;
   border-radius: 999px;
