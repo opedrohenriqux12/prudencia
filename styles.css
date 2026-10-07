@@ -431,6 +431,95 @@ body.back .scene .a{
 .s-split.on .vs{transform:none}
 
 /* =========================================================
+   CENA INTRODUÇÃO BANCO MASTER
+   ========================================================= */
+.s-master-intro {
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.dollars-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.dollar {
+  position: absolute;
+  font-size: clamp(1.8rem, 3vw, 3.2rem);
+  opacity: 0.25;
+  filter: drop-shadow(0 4px 12px rgba(46, 158, 91, 0.3));
+  animation: floatDollar 7s ease-in-out infinite alternate;
+}
+
+.d1 { top: 12%; left: 8%; animation-delay: 0s; font-size: 2.8rem; }
+.d2 { top: 22%; right: 12%; animation-delay: 1.2s; font-size: 3.5rem; color: var(--g3); font-weight: 800; }
+.d3 { bottom: 18%; left: 14%; animation-delay: 2.4s; font-size: 2.5rem; }
+.d4 { bottom: 25%; right: 18%; animation-delay: 0.8s; font-size: 3.2rem; }
+.d5 { top: 65%; left: 45%; animation-delay: 3.1s; font-size: 2.2rem; color: var(--g4); font-weight: 800; }
+.d6 { top: 15%; left: 55%; animation-delay: 1.8s; font-size: 3rem; }
+.d7 { top: 75%; right: 8%; animation-delay: 2.7s; font-size: 2.6rem; }
+.d8 { top: 40%; left: 5%; animation-delay: 4s; font-size: 3.4rem; color: var(--g3); font-weight: 800; }
+
+@keyframes floatDollar {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translateY(-25px) rotate(12deg) scale(1.15);
+    opacity: 0.45;
+  }
+  100% {
+    transform: translateY(20px) rotate(-10deg) scale(0.95);
+    opacity: 0.25;
+  }
+}
+
+.master-intro-content {
+  position: relative;
+  z-index: 2;
+  max-width: 780px;
+  width: 100%;
+  padding: clamp(2.4rem, 4vw, 3.8rem);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6rem;
+  background: rgba(255, 255, 255, 0.88);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+}
+
+.master-logo-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.2rem 2rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  border: 1px solid var(--g1);
+  box-shadow: 0 10px 30px -15px rgba(18, 38, 26, 0.12);
+  margin-bottom: 0.5rem;
+}
+
+.master-logo-img {
+  max-width: min(340px, 70vw);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.08));
+}
+
+.master-intro-content h2 {
+  font-size: clamp(2.2rem, 1.2rem + 3.4vw, 4rem);
+}
+
+/* =========================================================
    DUELO DE GRUPOS / SORTEADOR DE TIMES
    ========================================================= */
 .s-duelo {

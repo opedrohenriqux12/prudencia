@@ -193,6 +193,7 @@
 
   /* ---------- Ações de cada cena ---------- */
   const HOOKS = {
+    "s-master-intro"(s) { applyTypewriter(s); },
     "s-news"() { renderNews(); },
     "s-flow"(s) { runFlow(s); },
     "s-balloon"() { toggleBalloon(false); later(() => toggleBalloon(true), 2000); },
