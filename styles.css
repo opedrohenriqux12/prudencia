@@ -94,15 +94,15 @@ body.is-fullscreen .i-fs-exit{display:block}
   will-change:transform, opacity, filter;
 }
 
-body.back .scene{
+body.back .scene:not(.on){
   transform:translateX(-65px);
 }
 
-.scene.on{
+.scene.on, body.back .scene.on{
   visibility:visible;
   opacity:1;
-  transform:translateX(0);
-  filter:blur(0px);
+  transform:none !important;
+  filter:blur(0px) !important;
   pointer-events:auto;
   /* Entrada suave, graciosa e prolongada */
   transition:
@@ -122,13 +122,13 @@ body.back .scene{
     transform 1.6s cubic-bezier(0.16, 1, 0.3, 1),
     filter 1.4s ease;
 }
-body.back .scene .a{
+body.back .scene:not(.on) .a{
   transform:translateY(-36px) skewY(-1deg);
 }
-.scene.on .a{
+.scene.on .a, body.back .scene.on .a{
   opacity:1;
-  transform:none;
-  filter:blur(0px);
+  transform:none !important;
+  filter:blur(0px) !important;
   transition-delay:calc(var(--i, 0) * 140ms + 280ms);
 }
 
@@ -150,10 +150,10 @@ body.back .scene .a{
     transform 1.05s cubic-bezier(0.16, 1, 0.3, 1),
     filter 0.9s ease;
 }
-.scene.on .words .ch{
+.scene.on .words .ch, body.back .scene.on .words .ch{
   opacity:1;
-  transform:none;
-  filter:blur(0px);
+  transform:none !important;
+  filter:blur(0px) !important;
   /* Letras sendo escritas suavemente em cadência contínua e relaxada */
   transition-delay:calc(var(--ci, 0) * 32ms + 260ms);
 }
@@ -181,10 +181,10 @@ body.back .scene .a{
     filter 1.4s ease,
     opacity 1.3s ease;
 }
-.scene.on .gl>span{
-  transform:none;
+.scene.on .gl>span, body.back .scene.on .gl>span{
+  transform:none !important;
   opacity:1;
-  filter:blur(0px);
+  filter:blur(0px) !important;
   transition-delay:calc(var(--i, 0) * 220ms + 180ms);
 }
 
