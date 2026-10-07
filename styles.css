@@ -448,35 +448,36 @@ body.back .scene .a{
   overflow: hidden;
 }
 
-.dollar {
+.floating-bill {
   position: absolute;
-  font-size: clamp(1.8rem, 3vw, 3.2rem);
-  opacity: 0.25;
-  filter: drop-shadow(0 4px 12px rgba(46, 158, 91, 0.3));
-  animation: floatDollar 7s ease-in-out infinite alternate;
+  width: clamp(140px, 20vw, 240px);
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  opacity: 0.35;
+  filter: drop-shadow(0 6px 16px rgba(46, 158, 91, 0.25));
+  animation: floatBill 8s ease-in-out infinite alternate;
 }
 
-.d1 { top: 12%; left: 8%; animation-delay: 0s; font-size: 2.8rem; }
-.d2 { top: 22%; right: 12%; animation-delay: 1.2s; font-size: 3.5rem; color: var(--g3); font-weight: 800; }
-.d3 { bottom: 18%; left: 14%; animation-delay: 2.4s; font-size: 2.5rem; }
-.d4 { bottom: 25%; right: 18%; animation-delay: 0.8s; font-size: 3.2rem; }
-.d5 { top: 65%; left: 45%; animation-delay: 3.1s; font-size: 2.2rem; color: var(--g4); font-weight: 800; }
-.d6 { top: 15%; left: 55%; animation-delay: 1.8s; font-size: 3rem; }
-.d7 { top: 75%; right: 8%; animation-delay: 2.7s; font-size: 2.6rem; }
-.d8 { top: 40%; left: 5%; animation-delay: 4s; font-size: 3.4rem; color: var(--g3); font-weight: 800; }
+.d1 { top: 8%; left: 4%; animation-delay: 0s; transform: rotate(-12deg); }
+.d2 { top: 12%; right: 5%; animation-delay: 1.5s; transform: rotate(15deg); }
+.d3 { bottom: 10%; left: 6%; animation-delay: 2.8s; transform: rotate(10deg); }
+.d4 { bottom: 12%; right: 8%; animation-delay: 0.9s; transform: rotate(-18deg); }
+.d5 { top: 68%; left: 38%; animation-delay: 3.5s; transform: rotate(6deg); width: clamp(120px, 15vw, 180px); }
+.d6 { top: 40%; right: 3%; animation-delay: 2.1s; transform: rotate(-8deg); width: clamp(130px, 16vw, 190px); }
 
-@keyframes floatDollar {
+@keyframes floatBill {
   0% {
-    transform: translateY(0) rotate(0deg) scale(1);
-    opacity: 0.2;
+    transform: translateY(0) rotate(-10deg) scale(1);
+    opacity: 0.3;
   }
   50% {
-    transform: translateY(-25px) rotate(12deg) scale(1.15);
-    opacity: 0.45;
+    transform: translateY(-28px) rotate(8deg) scale(1.08);
+    opacity: 0.55;
   }
   100% {
-    transform: translateY(20px) rotate(-10deg) scale(0.95);
-    opacity: 0.25;
+    transform: translateY(22px) rotate(-14deg) scale(0.95);
+    opacity: 0.35;
   }
 }
 
