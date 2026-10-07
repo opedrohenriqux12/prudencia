@@ -1113,7 +1113,7 @@ body.back .scene:not(.on) .a{
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 9999;
+  z-index: 2;
   overflow: hidden;
 }
 
@@ -1121,10 +1121,10 @@ body.back .scene:not(.on) .a{
   position: absolute;
   height: auto;
   border-radius: 8px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.22);
-  filter: drop-shadow(0 6px 14px rgba(46, 158, 91, 0.35));
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  filter: drop-shadow(0 6px 14px rgba(46, 158, 91, 0.2));
   will-change: transform, opacity;
-  animation: moneyRainFall var(--fall-duration, 2.2s) cubic-bezier(0.25, 0.46, 0.45, 0.94) var(--fall-delay, 0s) forwards;
+  animation: moneyRainFall var(--fall-duration, 5s) cubic-bezier(0.25, 0.46, 0.45, 0.94) var(--fall-delay, 0s) forwards;
 }
 
 @keyframes moneyRainFall {
@@ -1132,14 +1132,15 @@ body.back .scene:not(.on) .a{
     transform: translateY(-220px) rotate(var(--rot-start, -15deg)) scale(var(--bill-scale, 1));
     opacity: 0;
   }
-  12% {
-    opacity: 0.95;
+  15% {
+    opacity: 0.35;
   }
   50% {
     transform: translateY(50vh) translateX(var(--sway-x, 40px)) rotate(var(--rot-mid, 90deg)) scale(var(--bill-scale, 1));
+    opacity: 0.40;
   }
   85% {
-    opacity: 0.9;
+    opacity: 0.30;
   }
   100% {
     transform: translateY(115vh) translateX(calc(var(--sway-x, 40px) * -0.5)) rotate(var(--rot-end, 240deg)) scale(var(--bill-scale, 1));

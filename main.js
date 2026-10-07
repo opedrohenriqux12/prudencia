@@ -221,13 +221,13 @@
 
       const width = Math.floor(Math.random() * (210 - 90 + 1)) + 90;
       const left = Math.floor(Math.random() * 92);
-      const delay = (Math.random() * 0.7).toFixed(2);
-      const duration = (1.5 + Math.random() * 1.2).toFixed(2);
+      const delay = (Math.random() * 1.2).toFixed(2);
+      const duration = (4.2 + Math.random() * 2.8).toFixed(2);
       const rotStart = Math.floor(Math.random() * 60 - 30);
       const rotMid = Math.floor(Math.random() * 180 - 90);
       const rotEnd = Math.floor(Math.random() * 360 - 180);
       const swayX = Math.floor(Math.random() * 140 - 70);
-      const scale = (0.75 + Math.random() * 0.5).toFixed(2);
+      const scale = (0.75 + Math.random() * 0.45).toFixed(2);
 
       img.style.width = `${width}px`;
       img.style.left = `${left}%`;
@@ -247,7 +247,7 @@
 
     setTimeout(() => {
       if (container) container.innerHTML = "";
-    }, 3800);
+    }, 8500);
   }
 
   /* ---------- Ações de cada cena ---------- */
