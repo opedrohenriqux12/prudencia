@@ -180,6 +180,12 @@
     document.body.classList.toggle("alert-mode", s.dataset.ch.includes("Master") || s.classList.contains("s-news"));
     pose(i);
 
+    // Chuva de notas ao trocar para qualquer seção do Banco Master
+    const isMasterScene = el => el.classList.contains("s-master-intro") || el.classList.contains("s-master") || el.classList.contains("s-flow") || el.classList.contains("s-balloon");
+    if (isMasterScene(s)) {
+      triggerMoneyRain();
+    }
+
     // Reseta índices internos se estiver entrando na cena
     if (s.classList.contains("s-apply")) {
       buildOrbit();
@@ -189,6 +195,59 @@
     } else {
       (HOOKS[s.classList[1]] || (() => {}))(s);
     }
+  }
+
+  /* ---------- Chuva de Notas do Banco Master (Top -> Bottom) ---------- */
+  function triggerMoneyRain() {
+    if (reduce) return;
+    let container = document.getElementById("money-rain-container");
+    if (!container) {
+      container = document.createElement("div");
+      container.id = "money-rain-container";
+      container.className = "money-rain-container";
+      container.setAttribute("aria-hidden", "true");
+      document.body.appendChild(container);
+    }
+    container.innerHTML = "";
+
+    const BILL_COUNT = 32;
+    const fragment = document.createDocumentFragment();
+
+    for (let i = 0; i < BILL_COUNT; i++) {
+      const img = document.createElement("img");
+      img.src = "daniel_vorcaro.jpg";
+      img.alt = "";
+      img.className = "falling-rain-bill";
+
+      const width = Math.floor(Math.random() * (210 - 90 + 1)) + 90;
+      const left = Math.floor(Math.random() * 92);
+      const delay = (Math.random() * 0.7).toFixed(2);
+      const duration = (1.5 + Math.random() * 1.2).toFixed(2);
+      const rotStart = Math.floor(Math.random() * 60 - 30);
+      const rotMid = Math.floor(Math.random() * 180 - 90);
+      const rotEnd = Math.floor(Math.random() * 360 - 180);
+      const swayX = Math.floor(Math.random() * 140 - 70);
+      const scale = (0.75 + Math.random() * 0.5).toFixed(2);
+
+      img.style.width = `${width}px`;
+      img.style.left = `${left}%`;
+      img.style.top = `0px`;
+      img.style.setProperty("--fall-delay", `${delay}s`);
+      img.style.setProperty("--fall-duration", `${duration}s`);
+      img.style.setProperty("--rot-start", `${rotStart}deg`);
+      img.style.setProperty("--rot-mid", `${rotMid}deg`);
+      img.style.setProperty("--rot-end", `${rotEnd}deg`);
+      img.style.setProperty("--sway-x", `${swayX}px`);
+      img.style.setProperty("--bill-scale", scale);
+
+      fragment.appendChild(img);
+    }
+
+    container.appendChild(fragment);
+
+    setTimeout(() => {
+      if (container) container.innerHTML = "";
+    }, 3800);
   }
 
   /* ---------- Ações de cada cena ---------- */
@@ -519,6 +578,10 @@
 
   function showAct(k) {
     if (!actStage) return;
+    const masterScene = $(".scene.s-master");
+    if (masterScene && masterScene.classList.contains("on") && currentActIdx !== k) {
+      triggerMoneyRain();
+    }
     currentActIdx = k;
     const a = C.atos[k];
     const n = C.atos.length;
