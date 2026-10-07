@@ -159,6 +159,50 @@
           <li class="a">Evidenciar operações com partes relacionadas</li>
         </ul>
       </div>
+    <!-- 8.5 · DUELO / SORTEADOR DE GRUPOS -->
+    <section class="scene s-duelo" data-ch="Duelo de Grupos" aria-label="Duelo Prudente ou não prudente">
+      <div class="duelo-wrap">
+        <header class="duelo-header">
+          <p class="eyebrow a">Dinâmica em Equipe</p>
+          <h2 class="words a">Duelo Prudente <em>ou não prudente</em></h2>
+        </header>
+
+        <div class="duelo-content glass a">
+          <div class="duelo-controls">
+            <div class="add-member-box">
+              <input type="text" id="new-member-input" placeholder="Digite um novo nome..." aria-label="Nome do participante" />
+              <button class="btn-sm" id="btn-add-member">+ Adicionar</button>
+            </div>
+            <button class="btn btn-sortear" id="btn-sortear-teams">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
+              <span>Sortear Time A x Time B</span>
+            </button>
+          </div>
+
+          <div class="members-pool-section">
+            <span class="pool-title">Participantes da Sala (<span id="members-count">11</span>):</span>
+            <div class="members-tags-grid" id="members-tags-grid"></div>
+          </div>
+
+          <div class="teams-result-grid" id="teams-result-grid" style="display:none;">
+            <div class="team-card team-a">
+              <div class="team-header">
+                <span class="team-badge">Time A</span>
+                <h3>Grupo Prudente</h3>
+              </div>
+              <ul class="team-list" id="team-a-list"></ul>
+            </div>
+            <div class="vs-badge-sm">VS</div>
+            <div class="team-card team-b">
+              <div class="team-header">
+                <span class="team-badge alt">Time B</span>
+                <h3>Grupo Imprudente</h3>
+              </div>
+              <ul class="team-list" id="team-b-list"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- 10 · SITUAÇÕES DA DINÂMICA (UMA POR PÁGINA COM TIMER E GABARITO NA MESMA TELA) -->

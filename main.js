@@ -196,8 +196,101 @@
     "s-news"() { renderNews(); },
     "s-flow"(s) { runFlow(s); },
     "s-balloon"() { toggleBalloon(false); later(() => toggleBalloon(true), 2000); },
+    "s-duelo"(s) { applyTypewriter(s); },
     "s-case"(s) { applyTypewriter(s); }
   };
+
+  /* ---------- Sorteador de Grupos: Duelo Prudente ou não prudente ---------- */
+  let dueloMembers = [
+    "Amanda", "Arthur", "Denise", "Heloisa", "Isaias",
+    "Joao", "Kemilyn", "Melissa", "Rebeca", "Ruan", "Samuel"
+  ];
+
+  function initDueloSection() {
+    const section = $(".s-duelo");
+    if (!section) return;
+
+    const input = $("#new-member-input", section);
+    const addBtn = $("#btn-add-member", section);
+    const sortearBtn = $("#btn-sortear-teams", section);
+    const tagsGrid = $("#members-tags-grid", section);
+    const countSpan = $("#members-count", section);
+
+    function renderTags() {
+      if (countSpan) countSpan.textContent = dueloMembers.length;
+      if (!tagsGrid) return;
+      tagsGrid.innerHTML = dueloMembers.map((name, idx) => `
+        <span class="member-tag">
+          ${name}
+          <button class="btn-del-tag" data-idx="${idx}" aria-label="Remover ${name}">&times;</button>
+        </span>
+      `).join("");
+
+      $$(".btn-del-tag", tagsGrid).forEach(b => {
+        b.onclick = (e) => {
+          e.stopPropagation();
+          const removeIdx = parseInt(b.dataset.idx, 10);
+          dueloMembers.splice(removeIdx, 1);
+          renderTags();
+        };
+      });
+    }
+
+    function addMember() {
+      if (!input) return;
+      const val = input.value.trim();
+      if (val) {
+        dueloMembers.push(val);
+        input.value = "";
+        renderTags();
+      }
+    }
+
+    if (addBtn) addBtn.onclick = addMember;
+    if (input) {
+      input.onkeydown = (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          addMember();
+        }
+      };
+    }
+
+    if (sortearBtn) {
+      sortearBtn.onclick = () => {
+        if (dueloMembers.length < 2) {
+          alert("Adicione pelo menos 2 participantes para sortear os times!");
+          return;
+        }
+
+        const shuffled = [...dueloMembers].sort(() => Math.random() - 0.5);
+        const mid = Math.ceil(shuffled.length / 2);
+        const teamA = shuffled.slice(0, mid);
+        const teamB = shuffled.slice(mid);
+
+        const resultGrid = $("#teams-result-grid", section);
+        const teamAList = $("#team-a-list", section);
+        const teamBList = $("#team-b-list", section);
+
+        if (teamAList) {
+          teamAList.innerHTML = teamA.map(m => `<li>${m}</li>`).join("");
+        }
+        if (teamBList) {
+          teamBList.innerHTML = teamB.map(m => `<li>${m}</li>`).join("");
+        }
+        if (resultGrid) {
+          resultGrid.style.display = "grid";
+          resultGrid.classList.remove("swap");
+          void resultGrid.offsetWidth;
+          resultGrid.classList.add("swap");
+        }
+      };
+    }
+
+    renderTags();
+  }
+
+  initDueloSection();
 
   /* ---------- Gerenciamento das 10 Situações com Timer & Gabarito ---------- */
   const situacoesList = C.situacoes || [...(C.situacoesParte1 || []), ...(C.situacoesParte2 || [])];
