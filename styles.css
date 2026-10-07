@@ -459,12 +459,21 @@ body.back .scene:not(.on) .a{
   animation: floatBill 8s ease-in-out infinite alternate;
 }
 
-.d1 { top: 8%; left: 4%; animation-delay: 0s; transform: rotate(-12deg); }
-.d2 { top: 12%; right: 5%; animation-delay: 1.5s; transform: rotate(15deg); }
-.d3 { bottom: 10%; left: 6%; animation-delay: 2.8s; transform: rotate(10deg); }
-.d4 { bottom: 12%; right: 8%; animation-delay: 0.9s; transform: rotate(-18deg); }
-.d5 { top: 68%; left: 38%; animation-delay: 3.5s; transform: rotate(6deg); width: clamp(120px, 15vw, 180px); }
-.d6 { top: 40%; right: 3%; animation-delay: 2.1s; transform: rotate(-8deg); width: clamp(130px, 16vw, 190px); }
+.d1  { top: 5%;  left: 3%;  animation-delay: 0s;   transform: rotate(-12deg); width: clamp(140px, 18vw, 230px); }
+.d2  { top: 6%;  right: 4%; animation-delay: 1.5s; transform: rotate(15deg);  width: clamp(150px, 19vw, 240px); }
+.d3  { bottom: 28%; left: 3%; animation-delay: 2.8s; transform: rotate(10deg);  width: clamp(160px, 20vw, 250px); }
+.d4  { bottom: 8%; right: 4%; animation-delay: 0.9s; transform: rotate(-18deg); width: clamp(150px, 18vw, 230px); }
+.d5  { top: 78%; left: 22%; animation-delay: 3.5s; transform: rotate(6deg);   width: clamp(130px, 15vw, 200px); }
+.d6  { top: 42%; right: 2%; animation-delay: 2.1s; transform: rotate(-8deg);  width: clamp(140px, 16vw, 210px); }
+.d7  { top: 48%; left: 2%;  animation-delay: 4.2s; transform: rotate(14deg);  width: clamp(150px, 17vw, 220px); }
+.d8  { bottom: 5%; left: 8%; animation-delay: 1.1s; transform: rotate(-15deg); width: clamp(160px, 19vw, 240px); }
+.d9  { top: 3%;  left: 32%; animation-delay: 2.6s; transform: rotate(-6deg);  width: clamp(130px, 14vw, 190px); }
+.d10 { top: 4%;  right: 30%; animation-delay: 0.4s; transform: rotate(8deg);   width: clamp(140px, 15vw, 200px); }
+.d11 { bottom: 6%; right: 28%; animation-delay: 3.8s; transform: rotate(-12deg); width: clamp(135px, 15vw, 195px); }
+.d12 { top: 68%; right: 18%; animation-delay: 1.9s; transform: rotate(11deg);  width: clamp(140px, 16vw, 210px); }
+.d13 { top: 28%; left: 16%; animation-delay: 4.8s; transform: rotate(-9deg);  width: clamp(125px, 14vw, 185px); }
+.d14 { top: 25%; right: 16%; animation-delay: 3.1s; transform: rotate(13deg);  width: clamp(130px, 15vw, 190px); }
+.d15 { bottom: 35%; right: 12%; animation-delay: 0.7s; transform: rotate(-5deg); width: clamp(145px, 16vw, 205px); }
 
 @keyframes floatBill {
   0% {
