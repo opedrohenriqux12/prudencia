@@ -522,7 +522,7 @@
     const a = C.atos[k];
     const n = C.atos.length;
     $$(".act-dot").forEach((b, j) => b.toggleAttribute("aria-current", j === k));
-    const nextActLabel = k < n - 1 ? `Avançar para ${C.atos[k + 1].n} →` : `Avançar para Notícias →`;
+    const nextActLabel = k < n - 1 ? `Avançar para ${C.atos[k + 1].n} →` : `Avançar para Mágica com Fundos →`;
 
     actStage.innerHTML = `
       <span class="act-num act-item" style="--i:0" aria-hidden="true">${k + 1}</span>
