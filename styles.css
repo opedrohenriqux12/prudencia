@@ -1106,51 +1106,8 @@ body.back .scene:not(.on) .a{
 }
 
 
-/* =========================================================
-   ANIMAÇÃO DE NOTAS CAINDO (BANCO MASTER TRANSITION RAIN)
-   ========================================================= */
-.money-rain-container {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 2;
-  overflow: hidden;
-}
-
-.falling-rain-bill {
-  position: absolute;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-  filter: drop-shadow(0 6px 14px rgba(46, 158, 91, 0.2));
-  will-change: transform, opacity;
-  animation: moneyRainFall var(--fall-duration, 5s) cubic-bezier(0.25, 0.46, 0.45, 0.94) var(--fall-delay, 0s) forwards;
-}
-
-@keyframes moneyRainFall {
-  0% {
-    transform: translateY(-220px) rotate(var(--rot-start, -15deg)) scale(var(--bill-scale, 1));
-    opacity: 0;
-  }
-  15% {
-    opacity: 0.35;
-  }
-  50% {
-    transform: translateY(50vh) translateX(var(--sway-x, 40px)) rotate(var(--rot-mid, 90deg)) scale(var(--bill-scale, 1));
-    opacity: 0.40;
-  }
-  85% {
-    opacity: 0.30;
-  }
-  100% {
-    transform: translateY(115vh) translateX(calc(var(--sway-x, 40px) * -0.5)) rotate(var(--rot-end, 240deg)) scale(var(--bill-scale, 1));
-    opacity: 0;
-  }
-}
-
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
   .cursor{display:none!important}
-  .money-rain-container{display:none!important}
 }
 
