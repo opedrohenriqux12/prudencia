@@ -511,10 +511,13 @@
 
   /* ---------- Banco Master: atos ---------- */
   const actsNav = $(".acts-nav"), actStage = $(".act-stage");
-  actsNav.innerHTML = C.atos.map((a, k) => `<button class="act-dot" data-k="${k}">${a.n}</button>`).join("");
-  $$(".act-dot").forEach(b => b.onclick = () => showAct(+b.dataset.k));
+  if (actsNav && actStage) {
+    actsNav.innerHTML = C.atos.map((a, k) => `<button class="act-dot" data-k="${k}">${a.n}</button>`).join("");
+    $$(".act-dot").forEach(b => b.onclick = () => showAct(+b.dataset.k));
+  }
 
   function showAct(k) {
+    if (!actStage) return;
     currentActIdx = k;
     const a = C.atos[k];
     const n = C.atos.length;
