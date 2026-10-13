@@ -72,42 +72,42 @@ window.CONTENT = {
     {
       num: 1,
       titulo: "Situação 1",
-      cenario: "Ana recebeu o salário na conta e só então comprou o que queria.",
+      cenario: "Trânsito: Bruno viu a luz amarela do semáforo acender longe, mas acelerou para não correr o risco de pegar o sinal vermelho fechando.",
       pergunta: "A atitude foi prudente ou imprudente?",
-      resposta: "Prudente",
-      explicacao: "O ganho já é certo e foi efetivamente realizado antes de assumir novos compromissos."
+      resposta: "Imprudente",
+      explicacao: "Aumentar a velocidade ao ver o sinal amarelo em vez de desacelerar amplia o risco de colisão e de furar o sinal vermelho."
     },
     {
       num: 2,
       titulo: "Situação 2",
-      cenario: "Carla soube que a conta de luz vai subir e passou a separar um valor extra todo mês.",
+      cenario: "Trabalho: Camila percebeu uma falha em um relatório do colega que seria enviado ao cliente, avisou o colega em particular antes do envio e ajustou sua própria parte.",
       pergunta: "A atitude foi prudente ou imprudente?",
       resposta: "Prudente",
-      explicacao: "Ela se prepara antes para o cenário mais cauteloso, constituindo uma provisão para um aumento provável."
+      explicacao: "Evitou um impacto negativo com o cliente e agiu com profissionalismo ao resolver o problema internamente antes do envio."
     },
     {
       num: 3,
       titulo: "Situação 3",
-      cenario: "Pedro tem uma bicicleta que custou R$ 800, mas hoje vale R$ 500, e continua dizendo que ela vale R$ 800.",
+      cenario: "Cotidiano: Rodrigo tem um voo importante às 18h e, sabendo do trânsito no horário de pico, decidiu sair de casa às 14h com folga exagerada.",
       pergunta: "A atitude foi prudente ou imprudente?",
-      resposta: "Imprudente",
-      explicacao: "Deveria reconhecer a perda e usar o valor menor (custo versus valor realizável líquido)."
+      resposta: "Prudente",
+      explicacao: "Priorizou a segurança de não perder o compromisso assumindo o custo da espera em vez de arriscar imprevistos de trânsito."
     },
     {
       num: 4,
       titulo: "Situação 4",
-      cenario: "Sofia vai receber uma restituição de imposto, mas sem data, e decidiu não contar com ela neste mês.",
+      cenario: "Trânsito: Mariana percebeu um barulho estalando ao esterçar o volante do carro, mas resolveu adiar a visita à oficina até a revisão programada daqui a 3 meses.",
       pergunta: "A atitude foi prudente ou imprudente?",
-      resposta: "Prudente",
-      explicacao: "Ela só conta com o ganho quando houver certeza da data e realização do recurso."
+      resposta: "Imprudente",
+      explicacao: "Ruídos na direção indicam falha mecânica/suspensão que pode comprometer o controle do veículo a qualquer momento."
     },
     {
       num: 5,
       titulo: "Situação 5",
-      cenario: "Maria emprestou R$ 100 a um amigo que sempre atrasa e já contou com esse dinheiro no orçamento do mês.",
+      cenario: "Trabalho: Lucas gravou no seu repositório local a versão final do código do projeto e não fez backup em nuvem por ser um trabalho individual rápido.",
       pergunta: "A atitude foi prudente ou imprudente?",
       resposta: "Imprudente",
-      explicacao: "Não há certeza de que o dinheiro vai voltar. Diante do histórico de calote/atraso, não se antecipa o recebimento."
+      explicacao: "Depender apenas do armazenamento local deixa o trabalho vulnerável a falhas de hardware, perda ou corrupção de dados."
     }
   ],
 
@@ -115,56 +115,56 @@ window.CONTENT = {
     {
       num: 6,
       titulo: "Situação 6",
-      cenario: "Rafa ganhou um prêmio em uma rifa e gastou o valor antes de recebê-lo.",
+      cenario: "Cotidiano: Juliana vai viajar para o exterior e ativou um aviso de viagem no cartão de crédito, além de levar uma quantia reserva em espécie.",
       pergunta: "A atitude foi prudente ou imprudente?",
-      resposta: "Imprudente",
-      explicacao: "Ganho futuro não se antecipa: é preciso esperar o recebimento concreto e certo."
+      resposta: "Prudente",
+      explicacao: "Antecipou falhas de pagamento (bloqueios preventivos) e garantiu um plano B para emergências financeiras fora do país."
     },
     {
       num: 7,
       titulo: "Situação 7",
-      cenario: "Bia soube que o celular dela caiu de preço e passou a planejar a venda pelo valor atual de mercado.",
+      cenario: "Trânsito: Gabriel faz o mesmo trajeto para o trabalho há anos, mas sempre liga o aplicativo de GPS antes de sair para verificar eventuais acidentes ou bloqueios na via.",
       pergunta: "A atitude foi prudente ou imprudente?",
       resposta: "Prudente",
-      explicacao: "Ela usa o valor que o bem realmente vale hoje no mercado, sem inflar suas expectativas de ativo."
+      explicacao: "Evita surpresas no caminho checando informações em tempo real, mesmo em rotas habituais."
     },
     {
       num: 8,
       titulo: "Situação 8",
-      cenario: "Tiago sabe que a geladeira, sem garantia, faz um barulho estranho e decidiu não separar nada para o conserto.",
+      cenario: "Trabalho: Amanda prometeu a entrega de uma demanda crítica para sexta-feira considerando que ninguém da equipe vá faltar ou ter imprevistos.",
       pergunta: "A atitude foi prudente ou imprudente?",
       resposta: "Imprudente",
-      explicacao: "Deveria reservar uma quantia para o conserto provável de um passivo iminente."
+      explicacao: "Montou o cronograma com base no cenário perfeito (sem margem de erro/contingência para imprevistos de pessoal)."
     },
     {
       num: 9,
       titulo: "Situação 9",
-      cenario: "Lucas recebeu uma multa que ainda pode ser contestada e decidiu ignorá-la até sair a decisão.",
+      cenario: "Cotidiano: Diego comprou um eletrodoméstico caro usado na internet sem testar na hora, confiando na palavra do vendedor que mostrou um vídeo do aparelho funcionando.",
       pergunta: "A atitude foi prudente ou imprudente?",
       resposta: "Imprudente",
-      explicacao: "Deveria reservar o valor, pois há risco razoável de ter que pagar a obrigação."
+      explicacao: "Aceitou um risco financeiro alto sem checagem presencial ou garantias formais de funcionamento."
     },
     {
       num: 10,
       titulo: "Situação 10",
-      cenario: "Dani combinou que uma amiga paga parte do aluguel, mas fez o orçamento prevendo pagar tudo caso ela atrase.",
+      cenario: "Trânsito: Beatriz notou que o pneu do carro está no limite de desgaste (careca), mas como não costuma pegar estrada, decidiu rodar mais alguns meses na cidade.",
       pergunta: "A atitude foi prudente ou imprudente?",
-      resposta: "Prudente",
-      explicacao: "Ela tem um plano para o caso de o valor não chegar, evitando inadimplência do passivo integral."
+      resposta: "Imprudente",
+      explicacao: "Pneu careca perde aderência e eficiência de frenagem mesmo em baixas velocidades na cidade, especialmente em pista molhada."
     }
   ],
 
   situacoes: [
-    { num: 1, titulo: "Situação 1", cenario: "Ana recebeu o salário na conta e só então comprou o que queria.", pergunta: "A atitude foi prudente ou imprudente?", resposta: "Prudente", explicacao: "O ganho já é certo e foi efetivamente realizado antes de assumir novos compromissos." },
-    { num: 2, titulo: "Situação 2", cenario: "Carla soube que a conta de luz vai subir e passou a separar um valor extra todo mês.", pergunta: "A atitude foi prudente ou imprudente?", resposta: "Prudente", explicacao: "Ela se prepara antes para o cenário mais cauteloso, constituindo uma provisão para um aumento provável." },
-    { num: 3, titulo: "Situação 3", cenario: "Pedro tem uma bicicleta que custou R$ 800, mas hoje vale R$ 500, e continua dizendo que ela vale R$ 800.", pergunta: "A atitude foi prudente ou imprudente?", resposta: "Imprudente", explicacao: "Deveria reconhecer a perda e usar o valor menor (custo versus valor realizável líquido)." },
-    { num: 4, titulo: "Situação 4", cenario: "Sofia vai receber uma restituição de imposto, mas sem data, e decidiu não contar com ela neste mês.", pergunta: "A atitude foi prudente ou imprudente?", resposta: "Prudente", explicacao: "Ela só conta com o ganho quando houver certeza da data e realização do recurso." },
-    { num: 5, titulo: "Situação 5", cenario: "Maria emprestou R$ 100 a um amigo que sempre atrasa e já contou com esse dinheiro no orçamento do mês.", pergunta: "A atitude foi prudente ou imprudente?", resposta: "Imprudente", explicacao: "Não há certeza de que o dinheiro vai voltar. Diante do histórico de calote/atraso, não se antecipa o recebimento." },
-    { num: 6, titulo: "Situação 6", cenario: "Rafa ganhou um prêmio em uma rifa e gastou o valor antes de recebê-lo.", pergunta: "A atitude foi prudente ou imprudente?", resposta: "Imprudente", explicacao: "Ganho futuro não se antecipa: é preciso esperar o recebimento concreto e certo." },
-    { num: 7, titulo: "Situação 7", cenario: "Bia soube que o celular dela caiu de preço e passou a planejar a venda pelo valor atual de mercado.", pergunta: "A atitude foi prudente ou imprudente?", resposta: "Prudente", explicacao: "Ela usa o valor que o bem realmente vale hoje no mercado, sem inflar suas expectativas de ativo." },
-    { num: 8, titulo: "Situação 8", cenario: "Tiago sabe que a geladeira, sem garantia, faz um barulho estranho e decidiu não separar nada para o conserto.", pergunta: "A atitude foi prudente ou imprudente?", resposta: "Imprudente", explicacao: "Deveria reservar uma quantia para o conserto provável de um passivo iminente." },
-    { num: 9, titulo: "Situação 9", cenario: "Lucas recebeu uma multa que ainda pode ser contestada e decidiu ignorá-la até sair a decisão.", pergunta: "A atitude foi prudente ou imprudente?", resposta: "Imprudente", explicacao: "Deveria reservar o valor, pois há risco razoável de ter que pagar a obrigação." },
-    { num: 10, titulo: "Situação 10", cenario: "Dani combinou que uma amiga paga parte do aluguel, mas fez o orçamento prevendo pagar tudo caso ela atrase.", pergunta: "A atitude foi prudente ou imprudente?", resposta: "Prudente", explicacao: "Ela tem um plano para o caso de o valor não chegar, evitando inadimplência do passivo integral." }
+    { num: 1, titulo: "Situação 1", cenario: "Trânsito: Bruno viu a luz amarela do semáforo acender longe, mas acelerou para não correr o risco de pegar o sinal vermelho fechando.", pergunta: "A atitude foi prudente ou imprudente?", resposta: "Imprudente", explicacao: "Aumentar a velocidade ao ver o sinal amarelo em vez de desacelerar amplia o risco de colisão e de furar o sinal vermelho." },
+    { num: 2, titulo: "Situação 2", cenario: "Trabalho: Camila percebeu uma falha em um relatório do colega que seria enviado ao cliente, avisou o colega em particular antes do envio e ajustou sua própria parte.", pergunta: "A atitude foi prudente ou imprudente?", resposta: "Prudente", explicacao: "Evitou um impacto negativo com o cliente e agiu com profissionalismo ao resolver o problema internamente antes do envio." },
+    { num: 3, titulo: "Situação 3", cenario: "Cotidiano: Rodrigo tem um voo importante às 18h e, sabendo do trânsito no horário de pico, decidiu sair de casa às 14h com folga exagerada.", pergunta: "A atitude foi prudente ou imprudente?", resposta: "Prudente", explicacao: "Priorizou a segurança de não perder o compromisso assumindo o custo da espera em vez de arriscar imprevistos de trânsito." },
+    { num: 4, titulo: "Situação 4", cenario: "Trânsito: Mariana percebeu um barulho estalando ao esterçar o volante do carro, mas resolveu adiar a visita à oficina até a revisão programada daqui a 3 meses.", pergunta: "A atitude foi prudente ou imprudente?", resposta: "Imprudente", explicacao: "Ruídos na direção indicam falha mecânica/suspensão que pode comprometer o controle do veículo a qualquer momento." },
+    { num: 5, titulo: "Situação 5", cenario: "Trabalho: Lucas gravou no seu repositório local a versão final do código do projeto e não fez backup em nuvem por ser um trabalho individual rápido.", pergunta: "A atitude foi prudente ou imprudente?", resposta: "Imprudente", explicacao: "Depender apenas do armazenamento local deixa o trabalho vulnerável a falhas de hardware, perda ou corrupção de dados." },
+    { num: 6, titulo: "Situação 6", cenario: "Cotidiano: Juliana vai viajar para o exterior e ativou um aviso de viagem no cartão de crédito, além de levar uma quantia reserva em espécie.", pergunta: "A atitude foi prudente ou imprudente?", resposta: "Prudente", explicacao: "Antecipou falhas de pagamento (bloqueios preventivos) e garantiu um plano B para emergências financeiras fora do país." },
+    { num: 7, titulo: "Situação 7", cenario: "Trânsito: Gabriel faz o mesmo trajeto para o trabalho há anos, mas sempre liga o aplicativo de GPS antes de sair para verificar eventuais acidentes ou bloqueios na via.", pergunta: "A atitude foi prudente ou imprudente?", resposta: "Prudente", explicacao: "Evita surpresas no caminho checando informações em tempo real, mesmo em rotas habituais." },
+    { num: 8, titulo: "Situação 8", cenario: "Trabalho: Amanda prometeu a entrega de uma demanda crítica para sexta-feira considerando que ninguém da equipe vá faltar ou ter imprevistos.", pergunta: "A atitude foi prudente ou imprudente?", resposta: "Imprudente", explicacao: "Montou o cronograma com base no cenário perfeito (sem margem de erro/contingência para imprevistos de pessoal)." },
+    { num: 9, titulo: "Situação 9", cenario: "Cotidiano: Diego comprou um eletrodoméstico caro usado na internet sem testar na hora, confiando na palavra do vendedor que mostrou um vídeo do aparelho funcionando.", pergunta: "A atitude foi prudente ou imprudente?", resposta: "Imprudente", explicacao: "Aceitou um risco financeiro alto sem checagem presencial ou garantias formais de funcionamento." },
+    { num: 10, titulo: "Situação 10", cenario: "Trânsito: Beatriz notou que o pneu do carro está no limite de desgaste (careca), mas como não costuma pegar estrada, decidiu rodar mais alguns meses na cidade.", pergunta: "A atitude foi prudente ou imprudente?", resposta: "Imprudente", explicacao: "Pneu careca perde aderência e eficiência de frenagem mesmo em baixas velocidades na cidade, especialmente em pista molhada." }
   ],
 
   fontes: [
