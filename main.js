@@ -9,7 +9,6 @@
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
   const fine = matchMedia("(hover: hover) and (pointer: fine)").matches;
-  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const fmt = n => Math.round(n).toLocaleString("pt-BR");
 
   const scenes = $$(".scene");
@@ -17,7 +16,7 @@
   let currentAreaIdx = 0;
   let currentActIdx = 0;
 
-  const later = (fn, ms) => timers.push(setTimeout(fn, reduce ? 0 : ms));
+  const later = (fn, ms) => timers.push(setTimeout(fn, ms));
 
   /* ---------- Divide textos em caracteres/letras para efeito Typewriter suave e fluido ---------- */
   function applyTypewriter(root = document) {
@@ -55,8 +54,8 @@
         el.classList.add("tw-live");
         requestAnimationFrame(() => {
           $$(".ch", el).forEach(ch => {
-            ch.style.animation = `typeChar 0.95s cubic-bezier(0.16, 1, 0.3, 1) both`;
-            ch.style.animationDelay = `calc(${ch.style.getPropertyValue("--ci")} * 32ms + 220ms)`;
+            ch.style.animation = `typeChar 0.55s cubic-bezier(0.16, 1, 0.3, 1) both`;
+            ch.style.animationDelay = `calc(${ch.style.getPropertyValue("--ci")} * 18ms + 80ms)`;
           });
         });
       }
@@ -87,8 +86,7 @@
   ];
   const morphs = $$(".morph");
   const pose = i => POSES[i % POSES.length].forEach(([x, y, s], k) => {
-    morphs[k].style.transform = `translate(${x}vw,${y}vh) scale(${s}) rotate(${i * 35 + k * 28}deg)`;
-    morphs[k].style.borderRadius = ["50%", "42% 58% 63% 37%", "60% 40% 35% 65%"][(i + k) % 3];
+    morphs[k].style.transform = `translate3d(${x}vw,${y}vh,0) scale(${s}) rotate(${i * 35 + k * 28}deg)`;
   });
 
   /* ---------- Barra de navegação ---------- */
@@ -158,7 +156,7 @@
   function goTo(i, initialSubIndex = 0) {
     i = Math.max(0, Math.min(scenes.length - 1, i));
     if (i === idx || lock) return;
-    lock = true; setTimeout(() => (lock = false), 750);
+    lock = true; setTimeout(() => (lock = false), 480);
     timers.forEach(clearTimeout); timers = [];
     document.body.classList.toggle("back", i < idx);
     if (idx >= 0) {
@@ -569,7 +567,6 @@
     later(() => s.classList.add("drawn"), 300);
     const place = (el, p, v) => { const pt = p.getPointAtLength(v * p.getTotalLength()); el.setAttribute("transform", `translate(${pt.x},${pt.y})`); };
     place(coin, p1, 1); place(junk, p2, 1);
-    if (reduce) return;
     const cycle = (n) => {
       if (n === 0 || !s.classList.contains("on")) return;
       const t0 = performance.now(), D = 1600;
@@ -632,13 +629,33 @@
     }
   }, { passive: true });
 
-  /* ---------- Cursor suave ---------- */
-  if (fine && !reduce) {
+  /* ---------- Cursor suave otimizado com GPU ---------- */
+  if (fine) {
     const c = $(".cursor");
-    let x = 0, y = 0, cx = 0, cy = 0;
-    addEventListener("mousemove", e => { x = e.clientX; y = e.clientY; });
-    (function loop() { cx += (x - cx) * .22; cy += (y - cy) * .22; c.style.transform = `translate(${cx}px,${cy}px)`; requestAnimationFrame(loop); })();
-    document.addEventListener("mouseover", e => c.classList.toggle("big", !!e.target.closest("button,summary,a,.case-card,.news-card")));
+    if (c) {
+      let x = -100, y = -100, cx = -100, cy = -100;
+      let running = false;
+      function loop() {
+        const dx = x - cx, dy = y - cy;
+        if (Math.abs(dx) > 0.1 || Math.abs(dy) > 0.1) {
+          cx += dx * 0.22;
+          cy += dy * 0.22;
+          c.style.transform = `translate3d(${cx}px,${cy}px,0)`;
+          requestAnimationFrame(loop);
+        } else {
+          running = false;
+        }
+      }
+      addEventListener("mousemove", e => {
+        x = e.clientX;
+        y = e.clientY;
+        if (!running) {
+          running = true;
+          requestAnimationFrame(loop);
+        }
+      }, { passive: true });
+      document.addEventListener("mouseover", e => c.classList.toggle("big", !!e.target.closest("button,summary,a,.case-card,.news-card")));
+    }
   }
 
   goTo(0);

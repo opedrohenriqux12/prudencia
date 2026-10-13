@@ -21,7 +21,7 @@ em{font-style:normal;color:var(--g3);font-weight:800}
 em.red{color:var(--alert)}
 button{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--g3);outline-offset:3px;border-radius:10px}
-.glass{background:rgba(255,255,255,.75);backdrop-filter:blur(24px) saturate(1.3);-webkit-backdrop-filter:blur(24px) saturate(1.3);border:1px solid rgba(168,230,184,.6);border-radius:var(--r);box-shadow:var(--shadow)}
+.glass{background:rgba(255,255,255,.78);backdrop-filter:blur(16px) saturate(1.2);-webkit-backdrop-filter:blur(16px) saturate(1.2);border:1px solid rgba(168,230,184,.6);border-radius:var(--r);box-shadow:var(--shadow)}
 .eyebrow{font:600 .78rem/1 var(--fb);letter-spacing:.16em;text-transform:uppercase;color:var(--g4);margin:0 0 1rem;display:inline-flex;gap:.6rem;align-items:center}
 .eyebrow::before{content:"";width:22px;height:2px;background:currentColor}
 .eyebrow.alert{color:var(--alert-d)}
@@ -31,13 +31,13 @@ button{font:inherit;color:inherit}
 .btn:focus-visible{outline:3px solid var(--g4)}
 
 /* Cursor */
-.cursor{position:fixed;left:0;top:0;width:34px;height:34px;margin:-17px 0 0 -17px;border:1.5px solid var(--g3);border-radius:50%;pointer-events:none;z-index:90;transition:width .3s var(--ease),height .3s var(--ease),margin .3s var(--ease),background .3s;display:none}
+.cursor{position:fixed;left:0;top:0;width:34px;height:34px;margin:-17px 0 0 -17px;border:1.5px solid var(--g3);border-radius:50%;pointer-events:none;z-index:90;transition:width .3s var(--ease),height .3s var(--ease),margin .3s var(--ease),background .3s;display:none;will-change:transform}
 .cursor.big{width:60px;height:60px;margin:-30px 0 0 -30px;background:rgba(168,230,184,.25)}
 @media (hover:hover) and (pointer:fine){.cursor{display:block}}
 
-/* Fundo suave */
-.stage-bg{position:fixed;inset:0;overflow:hidden;background:radial-gradient(120% 90% at 80% 0%,#EAF8EE,var(--white) 65%)}
-.morph{position:absolute;left:0;top:0;border-radius:50%;filter:blur(65px);will-change:transform,border-radius;transition:transform 2.4s cubic-bezier(0.2, 0.8, 0.2, 1),border-radius 2.4s ease,background 1.5s}
+/* Fundo suave com alta performance de GPU */
+.stage-bg{position:fixed;inset:0;overflow:hidden;background:radial-gradient(120% 90% at 80% 0%,#EAF8EE,var(--white) 65%);pointer-events:none}
+.morph{position:absolute;left:0;top:0;border-radius:50%;filter:blur(36px);will-change:transform;transform:translate3d(0,0,0);transition:transform 1.8s cubic-bezier(0.2, 0.8, 0.2, 1),background 1.2s;pointer-events:none}
 .m1{width:54vmax;height:54vmax;background:var(--g1);opacity:.55}
 .m2{width:36vmax;height:36vmax;background:var(--g2);opacity:.35}
 .m3{width:26vmax;height:26vmax;background:#DDF5E3;opacity:.85}
@@ -72,7 +72,7 @@ body.is-fullscreen .i-fs-exit{display:block}
 .stage{position:fixed;inset:0;z-index:5}
 
 /* =========================================================
-   TRANSIÇÕES SUAVES, LENTAS E LEVES (SLOW SILKY SLIDE)
+   TRANSIÇÕES RÁPIDAS, SUAVES E FLUIDAS (GPU ACCELERATED)
    ========================================================= */
 .scene{
   position:absolute;
@@ -83,56 +83,48 @@ body.is-fullscreen .i-fs-exit{display:block}
   visibility:hidden;
   opacity:0;
   pointer-events:none;
-  /* Saída lenta, com amortecimento aéreo */
-  transform:translateX(65px);
-  filter:blur(8px);
+  transform:translate3d(36px, 0, 0);
   transition:
-    opacity 1.35s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 1.45s cubic-bezier(0.16, 1, 0.3, 1),
-    filter 1.35s ease,
-    visibility 0s linear 1.45s;
-  will-change:transform, opacity, filter;
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.68s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0s linear 0.68s;
+  will-change:transform, opacity;
 }
 
 body.back .scene:not(.on){
-  transform:translateX(-65px);
+  transform:translate3d(-36px, 0, 0);
 }
 
 .scene.on, body.back .scene.on{
   visibility:visible;
   opacity:1;
-  transform:none !important;
-  filter:blur(0px) !important;
+  transform:translate3d(0, 0, 0) !important;
   pointer-events:auto;
-  /* Entrada suave, graciosa e prolongada */
   transition:
-    opacity 1.35s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 1.55s cubic-bezier(0.16, 1, 0.3, 1),
-    filter 1.35s ease,
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.68s cubic-bezier(0.16, 1, 0.3, 1),
     visibility 0s linear;
 }
 
-/* Elementos internos escalonados e elegantes: entrada serena, amortecida e sem pressa */
+/* Elementos internos escalonados e elegantes: entrada ágil e fluida */
 .scene .a{
   opacity:0;
-  transform:translateY(40px) skewY(1deg);
-  filter:blur(10px);
+  transform:translate3d(0, 22px, 0);
   transition:
-    opacity 1.5s cubic-bezier(0.2, 0.95, 0.3, 1),
-    transform 1.6s cubic-bezier(0.16, 1, 0.3, 1),
-    filter 1.4s ease;
+    opacity 0.58s cubic-bezier(0.2, 0.95, 0.3, 1),
+    transform 0.62s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change:transform, opacity;
 }
 body.back .scene:not(.on) .a{
-  transform:translateY(-36px) skewY(-1deg);
+  transform:translate3d(0, -18px, 0);
 }
 .scene.on .a, body.back .scene.on .a{
   opacity:1;
-  transform:none !important;
-  filter:blur(0px) !important;
-  transition-delay:calc(var(--i, 0) * 140ms + 280ms);
+  transform:translate3d(0, 0, 0) !important;
+  transition-delay:calc(var(--i, 0) * 65ms + 80ms);
 }
 
-/* Efeito Typewriter Suave e Escrito Letra por Letra (inspirado na serenidade da Seção 3) */
+/* Efeito Typewriter Suave e Escrito Letra por Letra (GPU Puro, sem blur para 60-120 FPS) */
 .words .w{
   display:inline-block;
   white-space:nowrap;
@@ -142,50 +134,40 @@ body.back .scene:not(.on) .a{
 .words .ch{
   display:inline-block;
   opacity:0;
-  transform:translateY(18px) scale(0.92) skewY(1.2deg);
-  filter:blur(6px);
-  will-change:transform, opacity, filter;
+  transform:translate3d(0, 8px, 0) scale(0.96);
   transition:
-    opacity 0.9s cubic-bezier(0.2, 0.9, 0.3, 1),
-    transform 1.05s cubic-bezier(0.16, 1, 0.3, 1),
-    filter 0.9s ease;
+    opacity 0.45s cubic-bezier(0.2, 0.9, 0.3, 1),
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .scene.on .words .ch, body.back .scene.on .words .ch{
   opacity:1;
-  transform:none !important;
-  filter:blur(0px) !important;
-  /* Letras sendo escritas suavemente em cadência contínua e relaxada */
-  transition-delay:calc(var(--ci, 0) * 32ms + 260ms);
+  transform:translate3d(0, 0, 0) scale(1) !important;
+  transition-delay:calc(var(--ci, 0) * 18ms + 120ms);
 }
 
 @keyframes typeChar{
   from{
     opacity:0;
-    transform:translateY(18px) scale(0.92) skewY(1.2deg);
-    filter:blur(6px);
+    transform:translate3d(0, 8px, 0) scale(0.96);
   }
   to{
     opacity:1;
-    transform:none;
-    filter:blur(0px);
+    transform:translate3d(0, 0, 0) scale(1);
   }
 }
 
-/* Frase Gigante: revelação monumental e serena */
+/* Frase Gigante: revelação monumental e fluida */
 .scene .gl>span{
-  transform:translateY(120%) skewY(1.5deg);
+  transform:translate3d(0, 105%, 0);
   opacity:0;
-  filter:blur(10px);
   transition:
-    transform 1.6s cubic-bezier(0.16, 1, 0.3, 1),
-    filter 1.4s ease,
-    opacity 1.3s ease;
+    transform 0.72s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.6s ease;
 }
 .scene.on .gl>span, body.back .scene.on .gl>span{
-  transform:none !important;
+  transform:translate3d(0, 0, 0) !important;
   opacity:1;
-  filter:blur(0px) !important;
-  transition-delay:calc(var(--i, 0) * 220ms + 180ms);
+  transition-delay:calc(var(--i, 0) * 110ms + 90ms);
 }
 
 /* Destaques animados (em): brilho sutil ao pousar */
@@ -453,10 +435,11 @@ body.back .scene:not(.on) .a{
   width: clamp(140px, 20vw, 240px);
   height: auto;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15), 0 0 16px rgba(46, 158, 91, 0.18);
   opacity: 0.35;
-  filter: drop-shadow(0 6px 16px rgba(46, 158, 91, 0.25));
-  animation: floatBill 8s ease-in-out infinite alternate;
+  will-change: transform;
+  backface-visibility: hidden;
+  animation: floatBill 7s ease-in-out infinite alternate;
 }
 
 .d1  { top: 5%;  left: 3%;  animation-delay: 0s;   transform: rotate(-12deg); width: clamp(140px, 18vw, 230px); }
@@ -477,15 +460,15 @@ body.back .scene:not(.on) .a{
 
 @keyframes floatBill {
   0% {
-    transform: translateY(0) rotate(-10deg) scale(1);
+    transform: translate3d(0, 0, 0) rotate(-10deg) scale(1);
     opacity: 0.3;
   }
   50% {
-    transform: translateY(-28px) rotate(8deg) scale(1.08);
-    opacity: 0.55;
+    transform: translate3d(0, -22px, 0) rotate(8deg) scale(1.05);
+    opacity: 0.45;
   }
   100% {
-    transform: translateY(22px) rotate(-14deg) scale(0.95);
+    transform: translate3d(0, 16px, 0) rotate(-14deg) scale(0.96);
     opacity: 0.35;
   }
 }
@@ -1010,52 +993,46 @@ body.back .scene:not(.on) .a{
 
 /* Elementos trocados internamente (com blur e deslocamento elegante) */
 .swap{
-  animation:swapIn 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation:swapIn 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 @keyframes swapIn{
   from{
     opacity:0;
-    transform:translateY(24px) skewY(0.8deg);
-    filter:blur(8px);
+    transform:translate3d(0, 16px, 0);
   }
   to{
     opacity:1;
-    transform:none;
-    filter:blur(0px);
+    transform:translate3d(0, 0, 0);
   }
 }
 
-/* Transição dos 3 Atos do Banco Master: lenta, serena e monumental */
+/* Transição dos 3 Atos do Banco Master: suave, rápida e fluida */
 .act-item{
-  animation:actItemIn 1.35s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-delay:calc(var(--i, 0) * 160ms + 100ms);
+  animation:actItemIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay:calc(var(--i, 0) * 80ms + 50ms);
 }
 @keyframes actItemIn{
   from{
     opacity:0;
-    transform:translateY(36px) skewY(1deg);
-    filter:blur(10px);
+    transform:translate3d(0, 20px, 0);
   }
   to{
     opacity:1;
-    transform:none;
-    filter:blur(0px);
+    transform:translate3d(0, 0, 0);
   }
 }
 .act-num.act-item{
   animation-name:actNumIn;
-  animation-duration:1.45s;
+  animation-duration:0.75s;
 }
 @keyframes actNumIn{
   from{
     opacity:0;
-    transform:translateX(-25%) scale(0.85);
-    filter:blur(10px);
+    transform:translate3d(-20%, 0, 0) scale(0.9);
   }
   to{
     opacity:1;
-    transform:none;
-    filter:blur(0px);
+    transform:translate3d(0, 0, 0);
   }
 }
 
@@ -1105,9 +1082,10 @@ body.back .scene:not(.on) .a{
   .giant{font-size:min(8vh,9vw)}
 }
 
-
 @media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
-  .cursor{display:none!important}
+  /* Reduz amplitude mantendo a apresentação fluida, viva e funcional em qualquer computador */
+  .scene, .scene .a, .words .ch, .swap, .act-item, .act-num.act-item {
+    transform: none !important;
+  }
 }
 
