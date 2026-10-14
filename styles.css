@@ -197,8 +197,8 @@ body.back .scene:not(.on) .a{
 .beam{transform-origin:200px 109px;animation:tilt 7s ease-in-out infinite}
 @keyframes tilt{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(5deg)}}
 
-/* 1 · Conceito (Layout Harmônico e Equilibrado) */
-.s-concept{justify-content:center;align-items:center}
+/* 1 · Conceito & Significado (Layout Harmônico e Equilibrado) */
+.s-concept, .s-meaning{justify-content:center;align-items:center}
 .concept-layout{
   display:grid;
   grid-template-columns:1.2fr 1fr;
@@ -262,6 +262,74 @@ body.back .scene:not(.on) .a{
   line-height:1.45;
 }
 .ch-icon{font-size:1.3rem;line-height:1}
+
+/* Card de Origem da Palavra / Etimologia */
+.etymo-highlight{
+  margin-top:.35rem;
+  padding:1.1rem 1.25rem;
+  background:linear-gradient(135deg, rgba(232,248,236,.95) 0%, rgba(212,244,221,.85) 100%);
+  border:1px solid rgba(46,158,91,.25);
+  border-radius:18px;
+  display:flex;
+  flex-direction:column;
+  gap:.75rem;
+  box-shadow:0 4px 16px rgba(46,158,91,.07);
+}
+.etymo-head{
+  display:flex;
+  gap:.85rem;
+  align-items:flex-start;
+}
+.etymo-head .ch-icon{
+  font-size:1.45rem;
+  line-height:1;
+  padding-top:.1rem;
+}
+.etymo-content{
+  display:flex;
+  flex-direction:column;
+  gap:.2rem;
+}
+.etymo-badge-title{
+  font:700 .75rem var(--fb);
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  color:var(--g4);
+}
+.etymo-text{
+  margin:0;
+  font-size:clamp(.92rem, .88rem + .2vw, 1.02rem);
+  line-height:1.5;
+  color:var(--ink);
+}
+.etymo-text strong em,
+.etymo-text em strong,
+.etymo-text em{
+  font-family:var(--fh);
+  font-weight:700;
+  color:var(--g4);
+  font-style:italic;
+  letter-spacing:-.01em;
+}
+.etymo-chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.5rem;
+  padding-top:.4rem;
+  border-top:1px solid rgba(46,158,91,.18);
+}
+.etymo-chips .chip{
+  background:#fff;
+  color:var(--g4);
+  font:600 .78rem var(--fb);
+  padding:.28rem .75rem;
+  border-radius:999px;
+  border:1px solid rgba(46,158,91,.25);
+  box-shadow:0 2px 6px rgba(15,31,21,.04);
+  display:inline-flex;
+  align-items:center;
+  gap:.35rem;
+}
 
 /* 2 · Frase gigante */
 .giant{font:800 clamp(2.6rem,1rem + 8.4vw,9.5rem)/.93 var(--fh);letter-spacing:-.055em;margin:0}
