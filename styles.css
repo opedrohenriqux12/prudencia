@@ -88,7 +88,13 @@ body.is-fullscreen .i-fs-exit{display:block}
     opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.68s cubic-bezier(0.16, 1, 0.3, 1),
     visibility 0s linear 0.68s;
-  will-change:transform, opacity;
+}
+
+/* Blindagem: Pausa imediata de animações contínuas em cenas inativas */
+.scene:not(.on) *,
+.scene:not(.on) *::before,
+.scene:not(.on) *::after {
+  animation-play-state: paused !important;
 }
 
 body.back .scene:not(.on){
@@ -100,6 +106,7 @@ body.back .scene:not(.on){
   opacity:1;
   transform:translate3d(0, 0, 0) !important;
   pointer-events:auto;
+  will-change:transform, opacity;
   transition:
     opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.68s cubic-bezier(0.16, 1, 0.3, 1),
@@ -505,7 +512,6 @@ body.back .scene:not(.on) .a{
   border-radius: 12px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15), 0 0 16px rgba(46, 158, 91, 0.18);
   opacity: 0.35;
-  will-change: transform;
   backface-visibility: hidden;
   animation: floatBill 7s ease-in-out infinite alternate;
 }
@@ -1160,10 +1166,64 @@ body.back .scene:not(.on) .a{
   .giant{font-size:min(8vh,9vw)}
 }
 
-@media (prefers-reduced-motion:reduce){
-  /* Reduz amplitude mantendo a apresentação fluida, viva e funcional em qualquer computador */
+/* =========================================================
+   BLINDAGEM CONTRA PC FRACO E ECONOMIA DE ENERGIA
+   ========================================================= */
+
+/* Dispositivos fracos ou em economia de bateria detectados via JS */
+body.low-spec .glass,
+body.power-save .glass {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  box-shadow: 0 4px 14px rgba(18, 38, 26, 0.08) !important;
+}
+
+body.low-spec .morph,
+body.power-save .morph {
+  filter: blur(12px) !important;
+  transition: transform 0.6s ease, background 0.6s !important;
+}
+
+body.low-spec .floating-bill,
+body.power-save .floating-bill {
+  animation: none !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12) !important;
+}
+
+body.low-spec .words .ch,
+body.power-save .words .ch {
+  transition-delay: 0s !important;
+}
+
+/* Modo nativo de redução de movimento do SO (Windows / Mac / Android / iOS) */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.12s !important;
+  }
   .scene, .scene .a, .words .ch, .swap, .act-item, .act-num.act-item {
     transform: none !important;
+  }
+  .words .ch {
+    opacity: 1 !important;
+    transition: none !important;
+  }
+  .glass {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(255, 255, 255, 0.96) !important;
+  }
+  .morph {
+    filter: blur(10px) !important;
+    transition: none !important;
+  }
+  .floating-bill, .beam, .balloon, .coin, .junk {
+    animation: none !important;
+  }
+  .cursor {
+    display: none !important;
   }
 }
 

@@ -15,11 +15,60 @@
   let idx = -1, timers = [], lock = false;
   let currentAreaIdx = 0;
   let currentActIdx = 0;
-
   const later = (fn, ms) => timers.push(setTimeout(fn, ms));
+
+  /* ---------- Blindagem de Performance e Economia de Energia ---------- */
+  const isReducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isWeakHardware = Boolean(
+    (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) ||
+    (navigator.deviceMemory && navigator.deviceMemory <= 4)
+  );
+
+  if (isWeakHardware) {
+    document.body.classList.add("low-spec");
+  }
+
+  if ("getBattery" in navigator) {
+    navigator.getBattery().then(battery => {
+      const updatePowerMode = () => {
+        const isBatterySaver = !battery.charging && battery.level <= 0.25;
+        document.body.classList.toggle("power-save", isBatterySaver);
+      };
+      updatePowerMode();
+      battery.addEventListener("levelchange", updatePowerMode);
+      battery.addEventListener("chargingchange", updatePowerMode);
+    }).catch(() => {});
+  }
+
+  // Monitor adaptativo de FPS: se houver engasgos sustentados, migra para low-spec
+  let lagCount = 0;
+  let lastTime = performance.now();
+  let frames = 0;
+  const checkFps = now => {
+    frames++;
+    if (now - lastTime >= 1000) {
+      const fps = (frames * 1000) / (now - lastTime);
+      if (fps < 32) {
+        lagCount++;
+        if (lagCount >= 2) {
+          document.body.classList.add("low-spec");
+          return;
+        }
+      } else {
+        lagCount = 0;
+      }
+      frames = 0;
+      lastTime = now;
+    }
+    if (lagCount < 2) requestAnimationFrame(checkFps);
+  };
+  requestAnimationFrame(checkFps);
+
+  const isLowPerformance = () => isReducedMotion || document.body.classList.contains("low-spec") || document.body.classList.contains("power-save");
 
   /* ---------- Divide textos em caracteres/letras para efeito Typewriter suave e fluido ---------- */
   function applyTypewriter(root = document) {
+    if (isLowPerformance()) return;
     $$(".words", root).forEach(el => {
       if (el.dataset.twDone) return;
       el.dataset.twDone = "true";
